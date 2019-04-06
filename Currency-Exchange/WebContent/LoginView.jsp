@@ -1,23 +1,27 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Login View</title>
-</head>
-<body>
-<img id="miImagen" src="${pageContext.request.contextPath}/images/img.png">
-	<shiro:guest>
+<%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
+
+<t:layout>
+	<jsp:attribute name="titleHeader">
+      <title>Login View </title>
+    </jsp:attribute>
+    <jsp:body>
+        <shiro:guest>
 		<h2>Login</h2>
 		<form action="LoginServlet" method="post">
-			Email: <input type="text" name="email" placeholder="Email" />
-			Password: <input type="password" name="password"
-				placeholder="Password" />
-			<button type="submit">Login</button>
+			<div class="form-group">
+    			<label for="exampleInputEmail1">Email address</label>
+    			<input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" name="email">
+    			<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+  			</div>
+			<div class="form-group">
+    			<label for="exampleInputPassword1">Password</label>
+    			<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password">
+  			</div>
+			<button type="submit" class="btn btn-primary">Login</button>
 		</form>
 		<c:if test= "${not empty professor_list}">
 		<h2>Crear nuevo TFG</h2>
@@ -42,11 +46,10 @@
 				Password: <input type="password" name="password" />
 			</p>
 			<p>
-				<button type="submit">Solicitar TFG</button>
+				<button type="submit" class="btn btn-primary">Solicitar TFG</button>
 			</p>
 		</form>
 		</c:if>
 	</shiro:guest>
-
-</body>
-</html>
+    </jsp:body>
+</t:layout>
