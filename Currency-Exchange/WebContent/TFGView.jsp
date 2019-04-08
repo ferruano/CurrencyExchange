@@ -22,7 +22,6 @@
 		<h5>e-mail: ${tfg.email}</h5>
 		<h5>Estado: ${tfg.status}</h5>
 		
-		<h5>Documento: ${tfg.document}</h5>
 		<c:if test="${tfg.status == 3}">	
 		<form action="Form4TFGServlet" method="post" enctype="multipart/form-data">
 		<input type= "hidden" name="email" value="${tfg.email}">
