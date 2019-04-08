@@ -6,50 +6,86 @@
 
 <t:layout>
 	<jsp:attribute name="titleHeader">
-      <title>Login View </title>
+      <title>Balance</title>
     </jsp:attribute>
     <jsp:body>
         <shiro:guest>
-		<h2>Login</h2>
-		<form action="LoginServlet" method="post">
-			<div class="form-group">
-    			<label for="exampleInputEmail1">Email address</label>
-    			<input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" name="email">
-    			<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-  			</div>
-			<div class="form-group">
-    			<label for="exampleInputPassword1">Password</label>
-    			<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password">
-  			</div>
-			<button type="submit" class="btn btn-primary">Login</button>
-		</form>
-		<c:if test= "${not empty professor_list}">
-		<h2>Crear nuevo TFG</h2>
-		<form action="CreateTFGServlet" method="post">
-			<p>
-				Nombre: <input type="text" name="name" />
-			</p>
-			<p>
-				Title: <input type="text" name="title" />
-			</p>
-			<p>
-				Email: <input type="text" name="email" />
-			</p>
-			<p>
-				Tutor: <select name = "advisor"><option value="" disabled selected>Elija un tutor</option>
-				<c:forEach items="${professor_list}" var="professori">
-					<option value="${professori.email}">${professori.name}-${professori.email}</option>
-				</c:forEach>
-				</select>
-			</p>
-			<p>
-				Password: <input type="password" name="password" />
-			</p>
-			<p>
-				<button type="submit" class="btn btn-primary">Solicitar TFG</button>
-			</p>
-		</form>
-		</c:if>
+		<h2>Account</h2>
+		<table class="table">
+  <thead class="thead-light" >
+    <tr>
+      <th scope="col">COIN</th>
+      <th scope="col">AMOUNT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>USD</td>
+      <td>${cliente.account.wallet.usd}</td>
+    </tr>
+    <tr>
+     <td>EUR</td>
+     <td>${cliente.account.wallet.eur}</td>
+    </tr>
+    <tr>
+     <td>YEN</td>
+     <td>${cliente.account.wallet.yen}</td>
+    </tr>
+    <tr>
+     <td>GBP</td>
+     <td>${cliente.account.wallet.gbp}</td>
+    </tr>
+    <tr>
+     <td>SFr</td>
+     <td>${cliente.account.wallet.sfr}</td>
+    </tr>
+    <tr>
+     <td>AUD</td>
+     <td>${cliente.account.wallet.aud}</td>
+    </tr>
+    <tr>
+     <td>CAD</td>
+     <td>${cliente.account.wallet.cad}</td>
+    </tr>
+  </tbody>
+</table>
+	<h4>DEPOSIT</h4>
+	<div class="input-group mb-3">
+	  <div class="input-group-prepend">
+	    <c:choose>
+	        <c:when test="${client.divisa == usd}"><span class="input-group-text">USD</span></c:when>
+	        <c:when test="${client.divisa == eur}"><span class="input-group-text">EUR</span></c:when>
+	        <c:when test="${client.divisa == yen}"><span class="input-group-text">YEN</span></c:when>
+	        <c:when test="${client.divisa == gbp}"><span class="input-group-text">GBP</span></c:when>
+	        <c:when test="${client.divisa == sfr}"><span class="input-group-text">SFr</span></c:when>
+	        <c:when test="${client.divisa == aud}"><span class="input-group-text">AUD</span></c:when>
+	        <c:when test="${client.divisa == cad}"><span class="input-group-text">CAD</span></c:when>
+	        <c:otherwise>undefined</c:otherwise>
+	    </c:choose>
+	    <input type="text" class="form-control" aria-label="Amount" name="depositAmount">
+	    <input type="hidden" name="email" value="${client.email}" />
+	    <button type="submit" class="btn btn-outline-secondary" type="button" action="DepositServlet" method="post">Deposit</button>
+	  </div>
+	</div>
+	<h4>WITHDRAW</h4>
+	<div class="input-group mb-3">
+		 <div class="input-group-prepend">
+		    <c:choose>
+		        <c:when test="${client.divisa == usd}"><span class="input-group-text">USD</span></c:when>
+		        <c:when test="${client.divisa == eur}"><span class="input-group-text">EUR</span></c:when>
+		        <c:when test="${client.divisa == yen}"><span class="input-group-text">YEN</span></c:when>
+		        <c:when test="${client.divisa == gbp}"><span class="input-group-text">GBP</span></c:when>
+		        <c:when test="${client.divisa == sfr}"><span class="input-group-text">SFr</span></c:when>
+		        <c:when test="${client.divisa == aud}"><span class="input-group-text">AUD</span></c:when>
+		        <c:when test="${client.divisa == cad}"><span class="input-group-text">CAD</span></c:when>
+		        <c:otherwise>undefined</c:otherwise>
+		    </c:choose>
+		    <input type="hidden" name="email" value="${client.email}" />
+		    <input type="hidden" name="coin" value="${client.divisa}" />
+  			<input type="text" class="form-control" aria-label="Amount" name="withdrawAmount">
+  		<button type="submit" class="btn btn-outline-secondary" type="button" action="WithdrawServlet" method="post">Whitdraw</button>
+		</div>
+	</div>
 	</shiro:guest>
     </jsp:body>
 </t:layout>
