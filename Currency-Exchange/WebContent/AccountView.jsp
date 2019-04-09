@@ -21,31 +21,31 @@
   <tbody>
     <tr>
       <td>USD</td>
-      <td>${cliente.account.wallet.usd}</td>
+      <td>${client.account.wallet.usd}</td>
     </tr>
     <tr>
      <td>EUR</td>
-     <td>${cliente.account.wallet.eur}</td>
+     <td>${client.account.wallet.eur}</td>
     </tr>
     <tr>
      <td>YEN</td>
-     <td>${cliente.account.wallet.yen}</td>
+     <td>${client.account.wallet.yen}</td>
     </tr>
     <tr>
      <td>GBP</td>
-     <td>${cliente.account.wallet.gbp}</td>
+     <td>${client.account.wallet.gbp}</td>
     </tr>
     <tr>
      <td>SFr</td>
-     <td>${cliente.account.wallet.sfr}</td>
+     <td>${client.account.wallet.sfr}</td>
     </tr>
     <tr>
      <td>AUD</td>
-     <td>${cliente.account.wallet.aud}</td>
+     <td>${client.account.wallet.aud}</td>
     </tr>
     <tr>
      <td>CAD</td>
-     <td>${cliente.account.wallet.cad}</td>
+     <td>${client.account.wallet.cad}</td>
     </tr>
   </tbody>
 </table>
@@ -53,13 +53,13 @@
 	<div class="input-group mb-3">
 	  <div class="input-group-prepend">
 	    <c:choose>
-	        <c:when test="${client.divisa == usd}"><span class="input-group-text">USD</span></c:when>
-	        <c:when test="${client.divisa == eur}"><span class="input-group-text">EUR</span></c:when>
-	        <c:when test="${client.divisa == yen}"><span class="input-group-text">YEN</span></c:when>
-	        <c:when test="${client.divisa == gbp}"><span class="input-group-text">GBP</span></c:when>
-	        <c:when test="${client.divisa == sfr}"><span class="input-group-text">SFr</span></c:when>
-	        <c:when test="${client.divisa == aud}"><span class="input-group-text">AUD</span></c:when>
-	        <c:when test="${client.divisa == cad}"><span class="input-group-text">CAD</span></c:when>
+	        <c:when test="${client.localCurrency == 6}"><span class="input-group-text">USD</span></c:when>
+	        <c:when test="${client.localCurrency == 3}"><span class="input-group-text">EUR</span></c:when>
+	        <c:when test="${client.localCurrency == 7}"><span class="input-group-text">YEN</span></c:when>
+	        <c:when test="${client.localCurrency == 4}"><span class="input-group-text">GBP</span></c:when>
+	        <c:when test="${client.localCurrency == 5}"><span class="input-group-text">SFr</span></c:when>
+	        <c:when test="${client.localCurrency == 1}"><span class="input-group-text">AUD</span></c:when>
+	        <c:when test="${client.localCurrency == 2}"><span class="input-group-text">CAD</span></c:when>
 	        <c:otherwise>undefined</c:otherwise>
 	    </c:choose>
 	    <input type="text" class="form-control" aria-label="Amount" name="depositAmount">
@@ -71,17 +71,17 @@
 	<div class="input-group mb-3">
 		 <div class="input-group-prepend">
 		    <c:choose>
-		        <c:when test="${client.divisa == usd}"><span class="input-group-text">USD</span></c:when>
-		        <c:when test="${client.divisa == eur}"><span class="input-group-text">EUR</span></c:when>
-		        <c:when test="${client.divisa == yen}"><span class="input-group-text">YEN</span></c:when>
-		        <c:when test="${client.divisa == gbp}"><span class="input-group-text">GBP</span></c:when>
-		        <c:when test="${client.divisa == sfr}"><span class="input-group-text">SFr</span></c:when>
-		        <c:when test="${client.divisa == aud}"><span class="input-group-text">AUD</span></c:when>
-		        <c:when test="${client.divisa == cad}"><span class="input-group-text">CAD</span></c:when>
+		        <c:when test="${client.localCurrency == 6}"><span class="input-group-text">USD</span></c:when>
+		        <c:when test="${client.localCurrency == 3}"><span class="input-group-text">EUR</span></c:when>
+		        <c:when test="${client.localCurrency == 7}"><span class="input-group-text">YEN</span></c:when>
+		        <c:when test="${client.localCurrency == 4}"><span class="input-group-text">GBP</span></c:when>
+		        <c:when test="${client.localCurrency == 5}"><span class="input-group-text">SFr</span></c:when>
+		        <c:when test="${client.localCurrency == 1}"><span class="input-group-text">AUD</span></c:when>
+		        <c:when test="${client.localCurrency == 2}"><span class="input-group-text">CAD</span></c:when>
 		        <c:otherwise>undefined</c:otherwise>
 		    </c:choose>
 		    <input type="hidden" name="email" value="${client.email}" />
-		    <input type="hidden" name="coin" value="${client.divisa}" />
+		    <input type="hidden" name="coin" value="${client.localCurrency}" />
   			<input type="text" class="form-control" aria-label="Amount" name="withdrawAmount">
   		<button type="submit" class="btn btn-outline-secondary" type="button" action="WithdrawServlet" method="post">Whitdraw</button>
 		</div>
