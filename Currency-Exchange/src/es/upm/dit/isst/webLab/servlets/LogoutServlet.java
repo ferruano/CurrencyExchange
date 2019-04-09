@@ -21,4 +21,5 @@ public class LogoutServlet extends HttpServlet {
 			currentUser.logout();
 		resp.sendRedirect( req.getContextPath() + "/LoginServlet" );
 	}
+	
 }

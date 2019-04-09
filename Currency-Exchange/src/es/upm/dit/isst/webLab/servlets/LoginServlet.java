@@ -33,4 +33,5 @@ public class LoginServlet extends HttpServlet {
 		} else
 			resp.sendRedirect( req.getContextPath() + "/AccountServlet?email=" + email );
 	}
+	
 }
