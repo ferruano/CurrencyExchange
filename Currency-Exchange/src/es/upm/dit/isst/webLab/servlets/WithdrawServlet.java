@@ -16,6 +16,8 @@ import es.upm.dit.isst.webLab.dao.ClientDAO;
 import es.upm.dit.isst.webLab.dao.ClientDAOImplementation;
 import es.upm.dit.isst.webLab.model.Client;
 
+import Constants.Constants;
+
 @WebServlet("/WithdrawServlet")
 public class WithdrawServlet extends HttpServlet{
 	
@@ -34,37 +36,59 @@ public class WithdrawServlet extends HttpServlet{
 		
 		ClientDAO cdao = ClientDAOImplementation.getInstance();
 		String email = req.getParameter("email");
-		String currency = req.getParameter("currency");
 		String amount = req.getParameter("amount");
 		
-		Client c = cdao.read(email);
-		switch(c.account.wallet) {
-			case "usd":
-				c.account.wallet.usd -= amount;
+		Client client = cdao.read(email);
+		
+		Double finalAmount = Double.parseDouble(amount);
+		
+		switch(client.getLocalCurrency()) {
+			case Constants.CURRENCY_AUD:
+				if (finalAmount > client.getAccount().getWallet().getAud()) {
+					throw new ServletException("No dispones de suficiente saldo");
+				}
+				client.getAccount().getWallet().setAud(finalAmount);
 				break;
-			case "eur":
-				c.account.wallet.eur -= amount;
+			case Constants.CURRENCY_CAD:
+				if (finalAmount > client.getAccount().getWallet().getCad()) {
+					throw new ServletException("No dispones de suficiente saldo");
+				}
+				client.getAccount().getWallet().setCad(finalAmount);
 				break;
-			case "yen":
-				c.account.wallet.yen -= amount;
+			case Constants.CURRENCY_EUR:
+				if (finalAmount > client.getAccount().getWallet().getEur()) {
+					throw new ServletException("No dispones de suficiente saldo");
+				}
+				client.getAccount().getWallet().setEur(finalAmount);
 				break;
-			case "gbp":
-				c.account.wallet.gbp -= amount;
+			case Constants.CURRENCY_GBP:
+				if (finalAmount > client.getAccount().getWallet().getGbp()) {
+					throw new ServletException("No dispones de suficiente saldo");
+				}
+				client.getAccount().getWallet().setGbp(finalAmount);
 				break;
-			case "sfr":
-				c.account.wallet.sfr -= amount;
+			case Constants.CURRENCY_SFR:
+				if (finalAmount > client.getAccount().getWallet().getSfr()) {
+					throw new ServletException("No dispones de suficiente saldo");
+				}
+				client.getAccount().getWallet().setSfr(finalAmount);
 				break;
-			case "aud":
-				c.account.wallet.aud -= amount;
+			case Constants.CURRENCY_USD:
+				if (finalAmount > client.getAccount().getWallet().getUsd()) {
+					throw new ServletException("No dispones de suficiente saldo");
+				}
+				client.getAccount().getWallet().setUsd(finalAmount);
 				break;
-			case "cad":
-				c.account.wallet.cad -= amount;
+			case Constants.CURRENCY_YEN:
+				if (finalAmount > client.getAccount().getWallet().getYen()) {
+					throw new ServletException("No dispones de suficiente saldo");
+				}
+				client.getAccount().getWallet().setYen(finalAmount);
 				break;
-			default: 
-						
+			default: 		
 		}
 		
-		cdao.update(c);
+		cdao.update(client);
 
 		resp.sendRedirect( req.getContextPath() + "/AccountServlet?email=" + email );
 
