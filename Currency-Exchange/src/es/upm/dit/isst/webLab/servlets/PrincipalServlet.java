@@ -11,17 +11,22 @@ import javax.servlet.http.HttpServletResponse;
 import es.upm.dit.isst.webLab.dao.ClientDAO;
 import es.upm.dit.isst.webLab.dao.ClientDAOImplementation;
 
-@WebServlet("/ManageServlet")
-public class ManageServlet extends HttpServlet{
+@WebServlet({ "/PrincipalServlet", "/" })
+public class PrincipalServlet extends HttpServlet {
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
+		String email = "admin@admin";
 		ClientDAO cdao = ClientDAOImplementation.getInstance();
-		String email = req.getParameter("email");
-		req.getSession().setAttribute( "client", cdao.read(email) );
-		req.getSession().setAttribute( "correcto", true);
+		req.getSession().setAttribute( "client", cdao.read(email));
 		
-		getServletContext().getRequestDispatcher( "/ManageView.jsp" ).forward( req, resp );
-	}
+		getServletContext().getRequestDispatcher( "/PrincipalView.jsp" ).forward( req, resp );
 
+		
+	}
+	
+
+	
+	
 }

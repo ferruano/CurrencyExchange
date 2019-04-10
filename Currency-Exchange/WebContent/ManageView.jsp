@@ -6,7 +6,7 @@
 
 <t:layout>
 	<jsp:attribute name="titleHeader">
-      <title>Balance</title>
+      <title>Deposit/Withdraw</title>
     </jsp:attribute>
     <jsp:body>
     	<shiro:guest>
@@ -58,7 +58,7 @@
     			<script>
     				window.addEventListener("load",function(){
          				alert("No dispones de saldo suficiente");
-         			}
+         			})
     			</script>
 			</c:if>
 		</shiro:guest>
