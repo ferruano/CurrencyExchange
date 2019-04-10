@@ -10,7 +10,7 @@
     </jsp:attribute>
     <jsp:body>
         <shiro:guest>
-		<h2>Account</h2>
+		<h2 style="text-align: center">Account</h2>
 		<table class="table">
   <thead class="thead-light" >
     <tr>
