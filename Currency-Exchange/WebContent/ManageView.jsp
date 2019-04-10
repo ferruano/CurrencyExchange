@@ -35,7 +35,7 @@
                   <div class="form-group">
                   <label for="cardNumber">Amount</label>
                   <div class="input-group">
-                    <input type="text" class="form-control" aria-label="Amount" name="amount" placeholder="" required>
+                    <input type="text" class="form-control" aria-label="Amount" name="amount" required>
                       <div class="input-group-append">
                          <span class="input-group-text text-muted">
                             <c:choose>
@@ -109,7 +109,7 @@
                   <div class="form-group">
                   <label for="cardNumber">Amount</label>
                   <div class="input-group">
-                    <input type="text" class="form-control" aria-label="Amount" name="amount" placeholder="" required>
+                    <input type="text" class="form-control" aria-label="Amount" name="amount" required>
                       <div class="input-group-append">
                          <span class="input-group-text text-muted">
                             <c:choose>
