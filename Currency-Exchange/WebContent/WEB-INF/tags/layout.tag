@@ -11,7 +11,7 @@
 </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#"><img id="miImagen" src="${pageContext.request.contextPath}/images/Logo.jpg"  width=50px></a>
+  <a class="navbar-brand" href="PrincipalServlet"><img id="miImagen" src="${pageContext.request.contextPath}/images/Logo.jpg" width=50px></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -25,17 +25,18 @@
         <a class="nav-link" href="#">Exchange rates</a>
       </li>
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="AccountServlet" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" method="get">
+        <a class="nav-link dropdown-toggle" href="AccountServlet" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Account
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="#">Activity</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="AccountServlet?email=${client.email}" method="get">Balance</a>
+          <a class="dropdown-item" href="AccountServlet?email=${client.email}">Balance</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="ManageServlet?email=${client.email}" method="get">Deposit/Withdraw</a>
+          <a class="dropdown-item" href="ManageServlet?email=${client.email}">Deposit/Withdraw</a>
         </div>
       </li>
+    </ul>
   </div>
 </nav>
 	<div class="container">
@@ -47,8 +48,8 @@
     		</div>
   		</div>
 	</div>
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
   </body>
 </html>
