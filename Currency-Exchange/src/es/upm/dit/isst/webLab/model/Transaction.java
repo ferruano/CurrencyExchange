@@ -9,7 +9,7 @@ import java.util.Date;
 public class Transaction implements Serializable {
 
     @Id
-    private int transactionID;
+    private String transactionID;
     private double amount;
     private int transactionType;
     private int currencyType;
@@ -22,11 +22,11 @@ public class Transaction implements Serializable {
 
     }
 
-	public int getTransactionID() {
+	public String getTransactionID() {
 		return transactionID;
 	}
 
-	public void setTransactionID(int transactionID) {
+	public void setTransactionID(String transactionID) {
 		this.transactionID = transactionID;
 	}
 

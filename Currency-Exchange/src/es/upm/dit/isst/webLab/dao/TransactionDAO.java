@@ -8,7 +8,7 @@ public interface TransactionDAO {
 
     void create(Transaction transaction);
 
-    Transaction read(int transactionID);
+    Transaction read(String transactionID);
 
     void update(Transaction transaction);
 

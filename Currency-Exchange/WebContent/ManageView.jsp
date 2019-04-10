@@ -23,8 +23,9 @@
 			        <c:when test="${client.localCurrency == 2}"><span class="input-group-text">CAD</span></c:when>
 			        <c:otherwise>undefined</c:otherwise>
 			    </c:choose>
-			    <form action="DepositServlet" method="post">
-			    	<input type="text" class="form-control" aria-label="Amount" name="amount">
+			    <form action="CreateTransactionServlet" method="post">
+			    	<input type="number" class="form-control" aria-label="Amount" name="amount">
+			    	<input type="hidden" name="transactionType" value="0" />
 			    	<input type="hidden" name="email" value="${client.email}" />
 			    	<button type="submit" class="btn btn-outline-secondary" type="button">Deposit</button>
 			    </form>
@@ -44,9 +45,10 @@
 				        <c:when test="${client.localCurrency == 2}"><span class="input-group-text">CAD</span></c:when>
 				        <c:otherwise>undefined</c:otherwise>
 				    </c:choose>
-				    <form action="WithdrawServlet" method="post">
+				    <form action="CreateTransactionServlet" method="post">
 				    	<input type="hidden" name="email" value="${client.email}" />
-		  				<input type="text" class="form-control" aria-label="Amount" name="amount">
+				    	<input type="hidden" name="transactionType" value="1" />
+		  				<input type="number" class="form-control" aria-label="Amount" name="amount">
 		  				<button type="submit" class="btn btn-outline-secondary" type="button">Whitdraw</button>
 				    </form>
 				</div>

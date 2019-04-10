@@ -24,14 +24,14 @@ public class TransactionDAOImplementation implements TransactionDAO {
             session.save(transaction);
             session.getTransaction().commit();
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println("==================================================" + e);
         } finally {
             session.close();
         }
     }
 
     @Override
-    public Transaction read(int transactionID) {
+    public Transaction read(String transactionID) {
         Session session = SessionFactoryService.get().openSession();
         Transaction transaction = null;
         try {

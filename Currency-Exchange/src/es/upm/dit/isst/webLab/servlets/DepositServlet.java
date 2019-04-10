@@ -11,27 +11,29 @@ import javax.servlet.http.HttpServletResponse;
 import Constants.Constants;
 import es.upm.dit.isst.webLab.dao.ClientDAO;
 import es.upm.dit.isst.webLab.dao.ClientDAOImplementation;
+import es.upm.dit.isst.webLab.dao.TransactionDAO;
+import es.upm.dit.isst.webLab.dao.TransactionDAOImplementation;
 import es.upm.dit.isst.webLab.dao.WalletDAO;
 import es.upm.dit.isst.webLab.dao.WalletDAOImplementation;
 import es.upm.dit.isst.webLab.model.Wallet;
 import es.upm.dit.isst.webLab.model.Client;
+import es.upm.dit.isst.webLab.model.Transaction;
 
 @WebServlet("/DepositServlet")
 public class DepositServlet extends HttpServlet{
 	
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		ClientDAO cdao = ClientDAOImplementation.getInstance();
 		WalletDAO wdao = WalletDAOImplementation.getInstance();
+		TransactionDAO tdao = TransactionDAOImplementation.getInstance();
 		
-		String email = req.getParameter("email");
-		String amount = req.getParameter("amount");
+		String transactionId = req.getParameter("transactionId");
+		Transaction transaction = tdao.read(transactionId);
+		Client client = transaction.getUser().getOwner();
+		Wallet wallet = transaction.getUser().getWallet();
 		
-		Client client = cdao.read(email);
-		Wallet wallet = wdao.read(client.getAccount().getWallet().getWalletID());
-		
-		Double depositAmount = Double.parseDouble(amount);
+		Double depositAmount = transaction.getAmmount();
 		
 		switch(client.getLocalCurrency()) {
 		
@@ -60,7 +62,7 @@ public class DepositServlet extends HttpServlet{
 	
 		wdao.update(wallet);
 
-		resp.sendRedirect( req.getContextPath() + "/AccountServlet?email=" + email );
+		resp.sendRedirect( req.getContextPath() + "/AccountServlet?email=" + client.getEmail() );
 
 	}
 }
