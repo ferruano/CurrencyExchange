@@ -4,6 +4,14 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style>
+	tr, td {
+		text-align: center;
+	}
+	table {
+		table-layout:fixed;
+	}
+</style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 <link rel="shortcut icon" href="${pageContext.request.contextPath}/images/Logo.jpg">
