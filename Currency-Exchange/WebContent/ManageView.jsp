@@ -53,6 +53,14 @@
 				    </form>
 				</div>
 			</div>
+			
+			<c:if test="${!correcto}">
+    			<script>
+    				window.addEventListener("load",function(){
+         				alert("No dispones de saldo suficiente");
+         			}
+    			</script>
+			</c:if>
 		</shiro:guest>
     </jsp:body>
 </t:layout>

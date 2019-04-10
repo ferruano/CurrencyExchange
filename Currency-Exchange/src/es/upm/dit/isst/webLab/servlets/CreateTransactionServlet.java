@@ -92,54 +92,63 @@ public class CreateTransactionServlet extends HttpServlet{
 		if (transactionType.equals("1")) {
 			
 			Double withdrawAmount = transaction.getAmmount();
+			req.getSession().setAttribute( "client", client);
+			Boolean correcto = true;
 			
 			switch(client.getLocalCurrency()) {
 			
 				case Constants.CURRENCY_AUD:
 					if (withdrawAmount > wallet.getAud()) {
-						throw new ServletException("No dispones de suficiente saldo");
+						correcto = false;
+						break;
 					}
 					tdao.create(transaction);
 					wallet.setAud(wallet.getAud() - withdrawAmount);
 					break;
 				case Constants.CURRENCY_CAD:
 					if (withdrawAmount > wallet.getCad()) {
-						throw new ServletException("No dispones de suficiente saldo");
+						correcto = false;
+						break;
 					}
 					tdao.create(transaction);
 					wallet.setCad(wallet.getCad() - withdrawAmount);
 					break;
 				case Constants.CURRENCY_EUR:
 					if (withdrawAmount > wallet.getEur()) {
-						throw new ServletException("No dispones de suficiente saldo");
+						correcto = false;
+						break;
 					}
 					tdao.create(transaction);
 					wallet.setEur(wallet.getEur() - withdrawAmount);				
 					break;
 				case Constants.CURRENCY_GBP:
 					if (withdrawAmount > wallet.getGbp()) {
-						throw new ServletException("No dispones de suficiente saldo");
+						correcto = false;
+						break;
 					}
 					tdao.create(transaction);
 					wallet.setGbp(wallet.getGbp() - withdrawAmount);
 					break;
 				case Constants.CURRENCY_SFR:
 					if (withdrawAmount > wallet.getSfr()) {
-						throw new ServletException("No dispones de suficiente saldo");
+						correcto = false;
+						break;
 					}
 					tdao.create(transaction);
 					wallet.setSfr(wallet.getSfr() - withdrawAmount);
 					break;
 				case Constants.CURRENCY_USD:
 					if (withdrawAmount > wallet.getUsd()) {
-						throw new ServletException("No dispones de suficiente saldo");
+						correcto = false;
+						break;
 					}
 					tdao.create(transaction);
 					wallet.setUsd(wallet.getUsd() - withdrawAmount);
 					break;
 				case Constants.CURRENCY_YEN:
 					if (withdrawAmount > wallet.getYen()) {
-						throw new ServletException("No dispones de suficiente saldo");
+						correcto = false;
+						break;
 					}
 					tdao.create(transaction);
 					wallet.setYen(wallet.getYen() - withdrawAmount);		
@@ -147,8 +156,9 @@ public class CreateTransactionServlet extends HttpServlet{
 			}
 			
 			wdao.update(wallet);
+			req.getSession().setAttribute( "correcto", correcto);
 
-			resp.sendRedirect( req.getContextPath() + "/AccountServlet?email=" + email );
+			getServletContext().getRequestDispatcher( "/ManageView.jsp" ).forward( req, resp );
 		}
 	}
 	
