@@ -49,43 +49,6 @@
     </tr>
   </tbody>
 </table>
-	<h4>DEPOSIT</h4>
-	<div class="input-group mb-3">
-	  <div class="input-group-prepend">
-	    <c:choose>
-	        <c:when test="${client.localCurrency == 6}"><span class="input-group-text">USD</span></c:when>
-	        <c:when test="${client.localCurrency == 3}"><span class="input-group-text">EUR</span></c:when>
-	        <c:when test="${client.localCurrency == 7}"><span class="input-group-text">YEN</span></c:when>
-	        <c:when test="${client.localCurrency == 4}"><span class="input-group-text">GBP</span></c:when>
-	        <c:when test="${client.localCurrency == 5}"><span class="input-group-text">SFr</span></c:when>
-	        <c:when test="${client.localCurrency == 1}"><span class="input-group-text">AUD</span></c:when>
-	        <c:when test="${client.localCurrency == 2}"><span class="input-group-text">CAD</span></c:when>
-	        <c:otherwise>undefined</c:otherwise>
-	    </c:choose>
-	    <input type="text" class="form-control" aria-label="Amount" name="depositAmount">
-	    <input type="hidden" name="email" value="${client.email}" />
-	    <button type="submit" class="btn btn-outline-secondary" type="button" action="DepositServlet" method="post">Deposit</button>
-	  </div>
-	</div>
-	<h4>WITHDRAW</h4>
-	<div class="input-group mb-3">
-		 <div class="input-group-prepend">
-		    <c:choose>
-		        <c:when test="${client.localCurrency == 6}"><span class="input-group-text">USD</span></c:when>
-		        <c:when test="${client.localCurrency == 3}"><span class="input-group-text">EUR</span></c:when>
-		        <c:when test="${client.localCurrency == 7}"><span class="input-group-text">YEN</span></c:when>
-		        <c:when test="${client.localCurrency == 4}"><span class="input-group-text">GBP</span></c:when>
-		        <c:when test="${client.localCurrency == 5}"><span class="input-group-text">SFr</span></c:when>
-		        <c:when test="${client.localCurrency == 1}"><span class="input-group-text">AUD</span></c:when>
-		        <c:when test="${client.localCurrency == 2}"><span class="input-group-text">CAD</span></c:when>
-		        <c:otherwise>undefined</c:otherwise>
-		    </c:choose>
-		    <input type="hidden" name="email" value="${client.email}" />
-		    <input type="hidden" name="coin" value="${client.localCurrency}" />
-  			<input type="text" class="form-control" aria-label="Amount" name="withdrawAmount">
-  		<button type="submit" class="btn btn-outline-secondary" type="button" action="WithdrawServlet" method="post">Whitdraw</button>
-		</div>
-	</div>
 	</shiro:guest>
     </jsp:body>
 </t:layout>

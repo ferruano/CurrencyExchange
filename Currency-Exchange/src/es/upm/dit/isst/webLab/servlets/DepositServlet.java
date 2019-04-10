@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import Constants.Constants;
 import es.upm.dit.isst.webLab.dao.ClientDAO;
 import es.upm.dit.isst.webLab.dao.ClientDAOImplementation;
+import es.upm.dit.isst.webLab.dao.WalletDAO;
+import es.upm.dit.isst.webLab.dao.WalletDAOImplementation;
 import es.upm.dit.isst.webLab.model.Wallet;
 import es.upm.dit.isst.webLab.model.Client;
 
@@ -21,11 +23,13 @@ public class DepositServlet extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		ClientDAO cdao = ClientDAOImplementation.getInstance();
+		WalletDAO wdao = WalletDAOImplementation.getInstance();
+		
 		String email = req.getParameter("email");
 		String amount = req.getParameter("amount");
 		
 		Client client = cdao.read(email);
-		Wallet wallet = client.getAccount().getWallet();
+		Wallet wallet = wdao.read(client.getAccount().getWallet().getWalletID());
 		
 		Double depositAmount = Double.parseDouble(amount);
 		
@@ -53,8 +57,8 @@ public class DepositServlet extends HttpServlet{
 				wallet.setYen(wallet.getYen() + depositAmount);		
 				break;	
 		}
-		
-		cdao.update(client);
+	
+		wdao.update(wallet);
 
 		resp.sendRedirect( req.getContextPath() + "/AccountServlet?email=" + email );
 

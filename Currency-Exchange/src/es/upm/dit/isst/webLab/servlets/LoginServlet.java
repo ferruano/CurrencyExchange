@@ -17,8 +17,8 @@ public class LoginServlet extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String email = "a@a";
-		String pass = "root";
+		String email = "admin@admin";
+		String pass = "admin";
 		Subject currentUser = SecurityUtils.getSubject();	
 		if ( !currentUser.isAuthenticated() ) {
 			UsernamePasswordToken token = new UsernamePasswordToken( email, pass );

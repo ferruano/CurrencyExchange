@@ -12,6 +12,7 @@ import java.util.Date;
 
 @Entity
 public class Client implements Serializable {
+	
     @Id
     private String email;
 

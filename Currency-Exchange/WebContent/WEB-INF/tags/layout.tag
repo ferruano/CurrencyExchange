@@ -18,8 +18,8 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Exchange<span class="sr-only">(current)</span></a>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Exchange</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Exchange rates</a>
@@ -31,7 +31,9 @@
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="#">Activity</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="AccountServlet" method="get">Balance</a>
+          <a class="dropdown-item" href="AccountServlet?email=${client.email}" method="get">Balance</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="ManageServlet?email=${client.email}" method="get">Deposit/Withdraw</a>
         </div>
       </li>
   </div>
