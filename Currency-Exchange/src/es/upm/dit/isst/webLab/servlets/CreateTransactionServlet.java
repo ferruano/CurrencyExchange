@@ -33,8 +33,11 @@ public class CreateTransactionServlet extends HttpServlet{
 		
 		String email = req.getParameter("email");
 		String amount = req.getParameter("amount");
-		if (amount.equals("")) {
-			amount = "0";
+		
+		if (Double.parseDouble(amount) == 0.0) {
+			req.getSession().setAttribute( "correcto", true);
+			getServletContext().getRequestDispatcher( "/ManageView.jsp" ).forward( req, resp );
+			return;
 		}
 		String transactionType = req.getParameter("transactionType");
 		
