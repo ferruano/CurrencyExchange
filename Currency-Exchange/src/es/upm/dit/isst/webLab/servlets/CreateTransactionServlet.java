@@ -1,8 +1,7 @@
 package es.upm.dit.isst.webLab.servlets;
 
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+
 import java.util.Date;
 
 import javax.servlet.ServletException;
@@ -11,12 +10,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import Constants.Constants;
 import es.upm.dit.isst.webLab.dao.ClientDAO;
 import es.upm.dit.isst.webLab.dao.ClientDAOImplementation;
 import es.upm.dit.isst.webLab.dao.TransactionDAO;
 import es.upm.dit.isst.webLab.dao.TransactionDAOImplementation;
+import es.upm.dit.isst.webLab.dao.WalletDAO;
+import es.upm.dit.isst.webLab.dao.WalletDAOImplementation;
 import es.upm.dit.isst.webLab.model.Client;
 import es.upm.dit.isst.webLab.model.Transaction;
+import es.upm.dit.isst.webLab.model.Wallet;
 
 @WebServlet("/CreateTransactionServlet")
 public class CreateTransactionServlet extends HttpServlet{
@@ -47,16 +50,105 @@ public class CreateTransactionServlet extends HttpServlet{
 		transaction.setCurrencyType(client.getLocalCurrency());
 		transaction.setTransactionDate(date);
 		transaction.setUser(client.getAccount());
-		
-		tdao.create(transaction);
-		//System.out.println(tdao.read(Long.parseLong(transactionId))); 
+				
+		WalletDAO wdao = WalletDAOImplementation.getInstance();
+		Wallet wallet = transaction.getUser().getWallet();
 		
 		if (transactionType.equals("0")) {
-			resp.sendRedirect( req.getContextPath() + "/DepositServlet?transactionId=" + transaction.getTransactionID());
+			
+			Double depositAmount = transaction.getAmmount();
+			tdao.create(transaction);
+			
+			switch(client.getLocalCurrency()) {
+			
+				case Constants.CURRENCY_AUD:
+					wallet.setAud(wallet.getAud() + depositAmount);
+					break;
+				case Constants.CURRENCY_CAD:
+					wallet.setCad(wallet.getCad() + depositAmount);
+					break;
+				case Constants.CURRENCY_EUR:
+					wallet.setEur(wallet.getEur() + depositAmount);				
+					break;
+				case Constants.CURRENCY_GBP:
+					wallet.setGbp(wallet.getGbp() + depositAmount);
+					break;
+				case Constants.CURRENCY_SFR:
+					wallet.setSfr(wallet.getSfr() + depositAmount);
+					break;
+				case Constants.CURRENCY_USD:
+					wallet.setUsd(wallet.getUsd() + depositAmount);
+					break;
+				case Constants.CURRENCY_YEN:
+					wallet.setYen(wallet.getYen() + depositAmount);		
+					break;	
+			}
+		
+			wdao.update(wallet);
+
+			resp.sendRedirect( req.getContextPath() + "/AccountServlet?email=" + client.getEmail() );
 		}
 		
 		if (transactionType.equals("1")) {
-			resp.sendRedirect( req.getContextPath() + "/WithdrawServlet?transactionId=" + transaction.getTransactionID());
+			
+			Double withdrawAmount = transaction.getAmmount();
+			
+			switch(client.getLocalCurrency()) {
+			
+				case Constants.CURRENCY_AUD:
+					if (withdrawAmount > wallet.getAud()) {
+						throw new ServletException("No dispones de suficiente saldo");
+					}
+					tdao.create(transaction);
+					wallet.setAud(wallet.getAud() - withdrawAmount);
+					break;
+				case Constants.CURRENCY_CAD:
+					if (withdrawAmount > wallet.getCad()) {
+						throw new ServletException("No dispones de suficiente saldo");
+					}
+					tdao.create(transaction);
+					wallet.setCad(wallet.getCad() - withdrawAmount);
+					break;
+				case Constants.CURRENCY_EUR:
+					if (withdrawAmount > wallet.getEur()) {
+						throw new ServletException("No dispones de suficiente saldo");
+					}
+					tdao.create(transaction);
+					wallet.setEur(wallet.getEur() - withdrawAmount);				
+					break;
+				case Constants.CURRENCY_GBP:
+					if (withdrawAmount > wallet.getGbp()) {
+						throw new ServletException("No dispones de suficiente saldo");
+					}
+					tdao.create(transaction);
+					wallet.setGbp(wallet.getGbp() - withdrawAmount);
+					break;
+				case Constants.CURRENCY_SFR:
+					if (withdrawAmount > wallet.getSfr()) {
+						throw new ServletException("No dispones de suficiente saldo");
+					}
+					tdao.create(transaction);
+					wallet.setSfr(wallet.getSfr() - withdrawAmount);
+					break;
+				case Constants.CURRENCY_USD:
+					if (withdrawAmount > wallet.getUsd()) {
+						throw new ServletException("No dispones de suficiente saldo");
+					}
+					tdao.create(transaction);
+					wallet.setUsd(wallet.getUsd() - withdrawAmount);
+					break;
+				case Constants.CURRENCY_YEN:
+					if (withdrawAmount > wallet.getYen()) {
+						throw new ServletException("No dispones de suficiente saldo");
+					}
+					tdao.create(transaction);
+					wallet.setYen(wallet.getYen() - withdrawAmount);		
+					break;		
+			}
+			
+			wdao.update(wallet);
+
+			resp.sendRedirect( req.getContextPath() + "/AccountServlet?email=" + email );
 		}
 	}
 	
