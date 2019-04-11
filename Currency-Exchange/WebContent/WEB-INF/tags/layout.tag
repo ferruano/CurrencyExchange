@@ -49,8 +49,8 @@
   </div>
 </nav>
 	<div class="container">
-  		<div class="row">
-    		<div class="col align-self-center">
+  		<div class="row justify-content-center">
+    		<div class="col-6 align-self-center">
        			<div id="body">
       				<jsp:doBody/>
     			</div>

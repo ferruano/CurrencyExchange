@@ -10,12 +10,15 @@
     </jsp:attribute>
     <jsp:body>
         <shiro:guest>
-		<h2 style="text-align: center">Account</h2>
+        <br>
+      <div class="card">
+  <div class="card-body">  
+		<h3 class="card-title">Account Balance</h3>
 		<table class="table">
   <thead class="thead-light" >
     <tr>
-      <th scope="col">COIN</th>
-      <th scope="col">AMOUNT</th>
+      <th scope="col">Currency</th>
+      <th scope="col">Amount</th>
     </tr>
   </thead>
   <tbody>
@@ -49,6 +52,8 @@
     </tr>
   </tbody>
 </table>
+ </div>
+</div>
 	</shiro:guest>
     </jsp:body>
 </t:layout>
