@@ -35,7 +35,7 @@
                   <div class="form-group">
                   <label for="cardNumber">Amount</label>
                   <div class="input-group">
-                    <input type="number" class="form-control" aria-label="Amount" name="amount" required>
+                    <input type="number" class="form-control" min="0" aria-label="Amount" name="amount" required>
                     <div class="input-group-append">
 
                           <c:choose>
@@ -109,7 +109,7 @@
                   <div class="form-group">
                   <label for="cardNumber">Amount</label>
                   <div class="input-group">
-                    <input type="number" class="form-control" aria-label="Amount" name="amount" required>
+                    <input type="number" class="form-control" min="0" aria-label="Amount" name="amount" required>
                       <div class="input-group-append">
                             <c:choose>
                           <c:when test="${client.localCurrency == 6}"><span class="input-group-text">USD</span></c:when>
