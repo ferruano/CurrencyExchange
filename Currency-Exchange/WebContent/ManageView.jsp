@@ -35,10 +35,10 @@
                   <div class="form-group">
                   <label for="cardNumber">Amount</label>
                   <div class="input-group">
-                    <input type="text" class="form-control" aria-label="Amount" name="amount" placeholder="">
-                      <div class="input-group-append">
-                         <span class="input-group-text text-muted">
-                            <c:choose>
+                    <input type="number" class="form-control" min="0" aria-label="Amount" name="amount" required>
+                    <div class="input-group-append">
+
+                          <c:choose>
                           <c:when test="${client.localCurrency == 6}"><span class="input-group-text">USD</span></c:when>
                           <c:when test="${client.localCurrency == 3}"><span class="input-group-text">EUR</span></c:when>
                           <c:when test="${client.localCurrency == 7}"><span class="input-group-text">YEN</span></c:when>
@@ -48,7 +48,7 @@
                           <c:when test="${client.localCurrency == 2}"><span class="input-group-text">CAD</span></c:when>
                           <c:otherwise>undefined</c:otherwise>
                         </c:choose>
-                        </span>
+
                       </div>
                   </div>
                 </div> <!-- form-group.// -->
@@ -81,7 +81,7 @@
               <div class="form-group">
                   <label for="cardNumber">Card number</label>
                   <div class="input-group">
-                    <input type="text" class="form-control" name="cardNumber" placeholder="0000 0000 0000 0000">
+                    <input type="number" class="form-control" name="cardNumber" placeholder="0000 0000 0000 0000">
                       <div class="input-group-append">
                          <span class="input-group-text text-muted">
                             <img src="${pageContext.request.contextPath}/images/credit-card.png" width="20px">
@@ -102,16 +102,15 @@
                     <div class="col-sm-4">
                         <div class="form-group">
                           <label data-toggle="tooltip" title="" data-original-title="3 digits code on back side of the card">CVV <i class="fa fa-question-circle"></i></label>
-                            <input type="number" class="form-control" required="">
+                            <input type="number" class="form-control" required>
                         </div> <!-- form-group.// -->
                       </div>
                   </div>
                   <div class="form-group">
                   <label for="cardNumber">Amount</label>
                   <div class="input-group">
-                    <input type="text" class="form-control" aria-label="Amount" name="amount" placeholder="">
+                    <input type="number" class="form-control" min="0" aria-label="Amount" name="amount" required>
                       <div class="input-group-append">
-                         <span class="input-group-text text-muted">
                             <c:choose>
                           <c:when test="${client.localCurrency == 6}"><span class="input-group-text">USD</span></c:when>
                           <c:when test="${client.localCurrency == 3}"><span class="input-group-text">EUR</span></c:when>
@@ -122,7 +121,6 @@
                           <c:when test="${client.localCurrency == 2}"><span class="input-group-text">CAD</span></c:when>
                           <c:otherwise>undefined</c:otherwise>
                         </c:choose>
-                        </span>
                       </div>
                   </div>
                 </div> <!-- form-group.// -->

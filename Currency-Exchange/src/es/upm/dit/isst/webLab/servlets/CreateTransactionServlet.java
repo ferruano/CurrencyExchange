@@ -33,6 +33,13 @@ public class CreateTransactionServlet extends HttpServlet{
 		
 		String email = req.getParameter("email");
 		String amount = req.getParameter("amount");
+		
+		
+		if (Double.parseDouble(amount) == 0.0) {
+			req.getSession().setAttribute( "correcto", true);
+			getServletContext().getRequestDispatcher( "/ManageView.jsp" ).forward( req, resp );
+			return;
+		}
 		String transactionType = req.getParameter("transactionType");
 		
 		Date date = new Date();
@@ -85,8 +92,8 @@ public class CreateTransactionServlet extends HttpServlet{
 			}
 		
 			wdao.update(wallet);
-
-			resp.sendRedirect( req.getContextPath() + "/AccountServlet?email=" + client.getEmail() );
+			req.getSession().setAttribute( "correcto", true);
+			getServletContext().getRequestDispatcher( "/ManageView.jsp" ).forward( req, resp );
 		}
 		
 		if (transactionType.equals("1")) {
@@ -157,7 +164,6 @@ public class CreateTransactionServlet extends HttpServlet{
 			
 			wdao.update(wallet);
 			req.getSession().setAttribute( "correcto", correcto);
-
 			getServletContext().getRequestDispatcher( "/ManageView.jsp" ).forward( req, resp );
 		}
 	}

@@ -4,8 +4,17 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style>
+	tr, td {
+		text-align: center;
+	}
+	table {
+		table-layout:fixed;
+	}
+</style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/images/Logo.jpg">
 <script type="text/javascript" src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js"></script>
 <jsp:invoke fragment="titleHeader"/>
 </head>
@@ -40,8 +49,8 @@
   </div>
 </nav>
 	<div class="container">
-  		<div class="row">
-    		<div class="col align-self-center">
+  		<div class="row justify-content-center">
+    		<div class="col-6 align-self-center">
        			<div id="body">
       				<jsp:doBody/>
     			</div>
