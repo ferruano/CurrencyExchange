@@ -33,8 +33,32 @@ public class CreateTransactionServlet extends HttpServlet{
 		
 		String email = req.getParameter("email");
 		String amount = req.getParameter("amount");
+		String currencyString = req.getParameter("currency"); 
+		int currency=1;
+		switch(currencyString) {
 		
-		
+		case "1":
+			currency = 1;
+			break;
+		case "2":
+			currency = 2;
+			break;
+		case "3":
+			currency = 3;			
+			break;
+		case "4":
+			currency = 4;
+			break;
+		case "5":
+			currency = 5;
+			break;
+		case "6":
+			currency = 6;
+			break;
+		case "7":
+			currency = 7;
+			break;	
+	}
 		if (Double.parseDouble(amount) == 0.0) {
 			req.getSession().setAttribute( "correcto", true);
 			getServletContext().getRequestDispatcher( "/ManageView.jsp" ).forward( req, resp );
@@ -54,7 +78,7 @@ public class CreateTransactionServlet extends HttpServlet{
 		transaction.setTransactionID(transactionId);
 		transaction.setAmmount(Double.parseDouble(amount));
 		transaction.setTransactionType(Integer.parseInt(transactionType));
-		transaction.setCurrencyType(client.getLocalCurrency());
+		transaction.setCurrencyType(currency);
 		transaction.setTransactionDate(date);
 		transaction.setUser(client.getAccount());
 				
@@ -102,7 +126,7 @@ public class CreateTransactionServlet extends HttpServlet{
 			req.getSession().setAttribute( "client", client);
 			Boolean correcto = true;
 			
-			switch(client.getLocalCurrency()) {
+			switch(currency) {
 			
 				case Constants.CURRENCY_AUD:
 					if (withdrawAmount > wallet.getAud()) {
@@ -164,7 +188,7 @@ public class CreateTransactionServlet extends HttpServlet{
 			
 			wdao.update(wallet);
 			req.getSession().setAttribute( "correcto", correcto);
-			getServletContext().getRequestDispatcher( "/ManageView.jsp" ).forward( req, resp );
+			getServletContext().getRequestDispatcher( "/TpvView.jsp" ).forward( req, resp );
 		}
 	}
 	
