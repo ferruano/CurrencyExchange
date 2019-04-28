@@ -63,7 +63,7 @@ public class CreateTransactionServlet extends HttpServlet{
 		
 		if (transactionType.equals("0")) {
 			
-			Double depositAmount = transaction.getAmmount();
+			Double depositAmount = transaction.getAmount();
 			tdao.create(transaction);
 			
 			switch(client.getLocalCurrency()) {
@@ -98,7 +98,7 @@ public class CreateTransactionServlet extends HttpServlet{
 		
 		if (transactionType.equals("1")) {
 			
-			Double withdrawAmount = transaction.getAmmount();
+			Double withdrawAmount = transaction.getAmount();
 			req.getSession().setAttribute( "client", client);
 			Boolean correcto = true;
 			

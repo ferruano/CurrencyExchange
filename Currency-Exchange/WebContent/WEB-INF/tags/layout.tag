@@ -38,7 +38,7 @@
           Account
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Activity</a>
+          <a class="dropdown-item" href="HistoryServlet?email=${client.email}">Activity</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="AccountServlet?email=${client.email}">Balance</a>
           <div class="dropdown-divider"></div>
