@@ -9,7 +9,7 @@
       <title>Deposit/Withdraw</title>
     </jsp:attribute>
     <jsp:body>
-      <shiro:guest>
+      <shiro:user>
       <br>
     <article class="card">
       <div class="card-body p-5">
@@ -135,6 +135,6 @@
     </article> <!-- card.// -->
     
 	<br>
-	    </shiro:guest>
+	    </shiro:user>
     </jsp:body>
 </t:layout>
