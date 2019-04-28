@@ -9,4 +9,7 @@ public class Constants {
 	public static final int CURRENCY_SFR = 5;
 	public static final int CURRENCY_USD = 6;
 	public static final int CURRENCY_YEN = 7;
+	
+	public static final String currency[] = {"USD", "EUR", "JPY", "GBP", "CHF", "AUD", "CAD"};
+
 }
