@@ -34,7 +34,7 @@ public class Transaction implements Serializable {
 		return amount;
 	}
 
-	public void setAmmount(double amount) {
+	public void setAmount(double amount) {
 		this.amount = amount;
 	}
 

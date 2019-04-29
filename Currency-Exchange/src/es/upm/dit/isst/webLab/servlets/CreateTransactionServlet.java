@@ -52,7 +52,7 @@ public class CreateTransactionServlet extends HttpServlet{
 		String transactionId = timeString + accountString;
 		
 		transaction.setTransactionID(transactionId);
-		transaction.setAmmount(Double.parseDouble(amount));
+		transaction.setAmount(Double.parseDouble(amount));
 		transaction.setTransactionType(Integer.parseInt(transactionType));
 		transaction.setCurrencyType(client.getLocalCurrency());
 		transaction.setTransactionDate(date);
