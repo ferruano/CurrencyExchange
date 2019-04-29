@@ -31,7 +31,7 @@
         <a class="nav-link" href="ExchangeServlet?email=${client.email}">Exchange</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Exchange rates</a>
+        <a class="nav-link" href="ExchangeRatesServlet?email=${client.email}">Exchange rates</a>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="AccountServlet" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
