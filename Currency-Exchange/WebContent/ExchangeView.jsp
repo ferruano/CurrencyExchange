@@ -9,7 +9,7 @@
       <title>Exchange Money</title>
     </jsp:attribute>
     <jsp:body>
-      <shiro:guest>
+      <shiro:user>
       <br>
     <article class="card">
       <div class="card-body p-5">
@@ -73,6 +73,6 @@
       </div> <!-- card-body.// -->
     </article> <!-- card.// -->
 	
-	    </shiro:guest>
+	    </shiro:user>
     </jsp:body>
 </t:layout>

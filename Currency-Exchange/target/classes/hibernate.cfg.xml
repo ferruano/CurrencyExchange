@@ -18,5 +18,6 @@
 		<mapping class="es.upm.dit.isst.webLab.model.Account"/>
 		<mapping class="es.upm.dit.isst.webLab.model.Wallet"/>
 		<mapping class="es.upm.dit.isst.webLab.model.Transaction"/>
+		<mapping class="es.upm.dit.isst.webLab.model.ExchangeRequest"/>
 	</session-factory>
 </hibernate-configuration>

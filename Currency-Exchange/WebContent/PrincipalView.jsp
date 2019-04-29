@@ -8,9 +8,9 @@
 	<jsp:attribute name="titleHeader">
       <title>You$wap</title>
     </jsp:attribute>
-    
-    <jsp:body>
-    	<shiro:guest>
+   
+    <jsp:body>   
+    	<shiro:user>
 			<div align="center" class="card" style="width: 30rem; display: block; margin: auto; margin-top:20px">
 			  <img src="${pageContext.request.contextPath}/images/Logo.jpg" class="card-img-top" alt="...">
 			  <div class="card-body">
@@ -19,6 +19,6 @@
 			    <a href="AccountServlet?email=admin@admin" class="btn btn-primary">Your balance</a>
 			  </div>
 			</div>
-		</shiro:guest>
+		</shiro:user>
     </jsp:body>
 </t:layout>

@@ -47,6 +47,9 @@
       </li>
     </ul>
   </div>
+  <form class="form-inline" action="LoginServlet" method="post">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login Admin</button>
+  </form>
 </nav>
 	<div class="container">
   		<div class="row justify-content-center">
