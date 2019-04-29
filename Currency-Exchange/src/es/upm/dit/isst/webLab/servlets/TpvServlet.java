@@ -22,6 +22,7 @@ public class TpvServlet extends HttpServlet {
 		String email = req.getParameter("email");
 		req.getSession().setAttribute( "client", cdao.read(email) );
 		req.getSession().setAttribute( "correcto", true);
+		req.getSession().setAttribute( "client_list", cdao.readAll() );
 		
 		getServletContext().getRequestDispatcher( "/TpvView.jsp" ).forward( req, resp );
 	}

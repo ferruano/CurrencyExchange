@@ -29,7 +29,13 @@
             <form action="CreateTransactionServlet" method="post">
                 <div class="form-group">
                   <label for="email">email </label>
-					<input type="text" name="email" />                </div> <!-- form-group.// -->
+                  	<select name="email" class="form-control" id="currency">
+	                  	<c:forEach items="${client_list}" var="clienti">
+							<option value="${clienti.email}">${clienti.email}</option>
+						</c:forEach>   
+                  	</select>
+					          
+				 </div> <!-- form-group.// -->
               <div class="form-group">
                 </div> <!-- form-group.// -->
                   <div class="form-group">
