@@ -30,12 +30,12 @@ public class Transaction implements Serializable {
 		this.transactionID = transactionID;
 	}
 
-	public double getAmmount() {
+	public double getAmount() {
 		return amount;
 	}
 
-	public void setAmmount(double ammount) {
-		this.amount = ammount;
+	public void setAmount(double amount) {
+		this.amount = amount;
 	}
 
 	public int getTransactionType() {
