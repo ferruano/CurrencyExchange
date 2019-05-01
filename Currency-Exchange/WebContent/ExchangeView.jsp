@@ -16,13 +16,14 @@
       <h2 class="card-title">Create an exchange Request</h2>
         <div class="tab-content">
           <div class="tab-pane fade show active" id="nav-tab-card">
-            <form action="CreateTransactionServlet" method="post">
+            <form action="ConfirmationServlet" method="post">
             <div class="container">
 				  <div class="row justify-content-md-center">
 				    <div class="col-4">
 				      <div class="form-group">
                   		<label for="amount">Amount </label>
-                 		 <input type="number" class="form-control" name="amount" placeholder="1000">
+                 		 <input type="number" class="form-control" name="amount">
+                 		 <input type="hidden" name="email" value="${client.email}">
                 	  </div> <!-- form-group.// -->
 				    </div>
 				    <div class="col-3">
@@ -40,7 +41,6 @@
 						</div> 
 				    </div>
 				    <div class="col-1">
-				      ->
 				    </div>
 				    <div class="col-3">
 				      <div class="form-group">
@@ -60,13 +60,11 @@
 				  <div class="row justify-content-md-center">
 				    <div class="col-8">
 				    </div>
-				    <div class="col-3">
+				    <div class="col-4">
 				    <button type="submit" class="btn btn-primary btn-block" type="button">Preview</button>
 				    </div>
 				  </div>
 				</div>
-                
-              
             </form>
           </div> <!-- tab-pane.// -->
         </div> <!-- tab-content .// -->
