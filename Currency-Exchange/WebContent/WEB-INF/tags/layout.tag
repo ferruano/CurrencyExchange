@@ -19,8 +19,8 @@
 <jsp:invoke fragment="titleHeader"/>
 </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="PrincipalServlet"><img id="miImagen" src="${pageContext.request.contextPath}/images/Logo.jpg" width=50px></a>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" >
+  <a class="navbar-brand" href="PrincipalServlet?email=${client.email}"><img id="miImagen" src="${pageContext.request.contextPath}/images/Logo.jpg" width=50px></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -47,16 +47,15 @@
       </li>
     </ul>
   </div>
-            <form class="form-inline" action="LoginServlet" method="post">    
-                <select class="selectpicker">
-                    <option>Mustard</option>
-                    <option>Ketchup</option>
-                    <option>Relish</option>
+            <form class="form-inline" action="LoginServlet" method="post">
+            
+                <select name="email" class="custom-select" onchange="this.form.submit()">
+                	<option disabled selected style="display:none">Select user</option>
+                    <option value="marta@gmail.com">Marta</option>
+                    <option value="john@gmail.com">John</option>
+                    <option value="admin@youswap.com">Admin</option>
                     </select>
             </form>
-  <form class="form-inline" action="LoginServlet" method="post">
-    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login Admin</button>
-  </form>
 </nav>
 	<div class="container">
   		<div class="row justify-content-center">

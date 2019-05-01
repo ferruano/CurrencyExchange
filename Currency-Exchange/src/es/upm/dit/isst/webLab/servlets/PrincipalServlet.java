@@ -16,22 +16,17 @@ public class PrincipalServlet extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-//		String email = "admin@admin";
-//		ClientDAO cdao = ClientDAOImplementation.getInstance();
-//		req.getSession().setAttribute( "client", cdao.read(email));
-		
+				
 		String email = req.getParameter("email");
 		ClientDAO cdao = ClientDAOImplementation.getInstance();
 		req.getSession().setAttribute( "client", cdao.read(email));
 		
 		getServletContext().getRequestDispatcher( "/PrincipalView.jsp" ).forward( req, resp );
-
 		
 	}
 	
 /*
- INSERT INTO CLIENT (EMAIL, ADDRESS, DATEOFBIRTH, NAME, LOCALCURRENCY, PASSWORD, SURNAMES)
+INSERT INTO CLIENT (EMAIL, ADDRESS, DATEOFBIRTH, NAME, LOCALCURRENCY, PASSWORD, SURNAMES)
 VALUES ('marta@gmail.com', 'Calle Ramos', '1997-11-22', 'Marta', 3, '4813494D137E1631BBA301D5ACAB6E7BB7AA74CE1185D456565EF51D737677B2', 'Molina');
 
 INSERT INTO ACCOUNT (ACCOUNTID, CARDNUMBER, OWNER_EMAIL)
