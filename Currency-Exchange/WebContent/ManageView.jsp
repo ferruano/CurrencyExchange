@@ -126,9 +126,9 @@
                             <c:choose>
                           <c:when test="${client.localCurrency == 6}"><span class="input-group-text">USD</span></c:when>
                           <c:when test="${client.localCurrency == 3}"><span class="input-group-text">EUR</span></c:when>
-                          <c:when test="${client.localCurrency == 7}"><span class="input-group-text">YEN</span></c:when>
+                          <c:when test="${client.localCurrency == 7}"><span class="input-group-text">JPY</span></c:when>
                           <c:when test="${client.localCurrency == 4}"><span class="input-group-text">GBP</span></c:when>
-                          <c:when test="${client.localCurrency == 5}"><span class="input-group-text">SFr</span></c:when>
+                          <c:when test="${client.localCurrency == 5}"><span class="input-group-text">CHF</span></c:when>
                           <c:when test="${client.localCurrency == 1}"><span class="input-group-text">AUD</span></c:when>
                           <c:when test="${client.localCurrency == 2}"><span class="input-group-text">CAD</span></c:when>
                           <c:otherwise>undefined</c:otherwise>
@@ -140,7 +140,7 @@
                 <input type="hidden" name="transactionType" value="0" />
                 <input type="hidden" name="email" value="${client.email}" />
                 <input type="hidden" name="currency" value="${client.localCurrency}" />
-                <button type="submit" class="btn btn-primary btn-block" type="button">Deposit</button>
+                <button type="submit" class="btn btn-primary btn-block" type="button">Load</button>
                 </form>
           </div> <!-- tab-pane.// -->
         </div> <!-- tab-content .// -->

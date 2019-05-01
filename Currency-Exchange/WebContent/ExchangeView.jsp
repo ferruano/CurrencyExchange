@@ -43,9 +43,9 @@
 						    <option value="2">CAD</option>
 						    <option value="3">EUR</option>
 						    <option value="4">GBP</option>
-						    <option value="5">SFr</option>
+						    <option value="5">CHF</option>
 						    <option value="6">USD</option>
-						    <option value="7">YEN</option>
+						    <option value="7">JPY</option>
 						  </select>
 						</div> 
 				    </div>
@@ -60,9 +60,9 @@
 						    <option value="2">CAD</option>
 						    <option value="3">EUR</option>
 						    <option value="4">GBP</option>
-						    <option value="5">SFr</option>
+						    <option value="5">CHF</option>
 						    <option value="6">USD</option>
-						    <option value="7">YEN</option>
+						    <option value="7">JPY</option>
 						  </select>
 						</div> 
 				    </div>

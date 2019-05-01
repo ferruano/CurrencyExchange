@@ -41,7 +41,7 @@
     </tr>
     <tr>
      <td>JPY</td>
-     <td>${client.account.wallet.yen}</td>
+     <td>${client.account.wallet.jpy}</td>
     </tr>
     <tr>
      <td>GBP</td>
@@ -49,7 +49,7 @@
     </tr>
     <tr>
      <td>CHF</td>
-     <td>${client.account.wallet.sfr}</td>
+     <td>${client.account.wallet.chf}</td>
     </tr>
     <tr>
      <td>AUD</td>
