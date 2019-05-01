@@ -136,14 +136,14 @@ public class CreateTransactionServlet extends HttpServlet{
 					case Constants.CURRENCY_GBP:
 						wallet.setGbp(wallet.getGbp() + depositAmount);
 						break;
-					case Constants.CURRENCY_CHF:
-						wallet.setChf(wallet.getChf() + depositAmount);
+					case Constants.CURRENCY_SFr:
+						wallet.setSfr(wallet.getSfr() + depositAmount);
 						break;
 					case Constants.CURRENCY_USD:
 						wallet.setUsd(wallet.getUsd() + depositAmount);
 						break;
-					case Constants.CURRENCY_JPY:
-						wallet.setJpy(wallet.getJpy() + depositAmount);		
+					case Constants.CURRENCY_YEN:
+						wallet.setYen(wallet.getYen() + depositAmount);		
 						break;	
 				}
 			
@@ -192,13 +192,13 @@ public class CreateTransactionServlet extends HttpServlet{
 						tdao.create(transaction);
 						wallet.setGbp(wallet.getGbp() - withdrawAmount);
 						break;
-					case Constants.CURRENCY_CHF:
-						if (withdrawAmount > wallet.getChf()) {
+					case Constants.CURRENCY_SFr:
+						if (withdrawAmount > wallet.getSfr()) {
 							correcto = false;
 							break;
 						}
 						tdao.create(transaction);
-						wallet.setChf(wallet.getChf() - withdrawAmount);
+						wallet.setSfr(wallet.getSfr() - withdrawAmount);
 						break;
 					case Constants.CURRENCY_USD:
 						if (withdrawAmount > wallet.getUsd()) {
@@ -208,13 +208,13 @@ public class CreateTransactionServlet extends HttpServlet{
 						tdao.create(transaction);
 						wallet.setUsd(wallet.getUsd() - withdrawAmount);
 						break;
-					case Constants.CURRENCY_JPY:
-						if (withdrawAmount > wallet.getJpy()) {
+					case Constants.CURRENCY_YEN:
+						if (withdrawAmount > wallet.getYen()) {
 							correcto = false;
 							break;
 						}
 						tdao.create(transaction);
-						wallet.setJpy(wallet.getJpy() - withdrawAmount);		
+						wallet.setYen(wallet.getYen() - withdrawAmount);		
 						break;		
 				}
 				
@@ -262,13 +262,13 @@ public class CreateTransactionServlet extends HttpServlet{
 						tdao.create(firstTransaction);
 						wallet.setGbp(wallet.getGbp() - oldAmount);
 						break;
-					case Constants.CURRENCY_CHF:
-						if (oldAmount > wallet.getChf()) {
+					case Constants.CURRENCY_SFr:
+						if (oldAmount > wallet.getSfr()) {
 							enough = false;
 							break;
 						}
 						tdao.create(firstTransaction);
-						wallet.setChf(wallet.getChf() - oldAmount);
+						wallet.setSfr(wallet.getSfr() - oldAmount);
 						break;
 					case Constants.CURRENCY_USD:
 						if (oldAmount > wallet.getUsd()) {
@@ -278,13 +278,13 @@ public class CreateTransactionServlet extends HttpServlet{
 						tdao.create(firstTransaction);
 						wallet.setUsd(wallet.getUsd() - oldAmount);
 						break;
-					case Constants.CURRENCY_JPY:
-						if (oldAmount > wallet.getJpy()) {
+					case Constants.CURRENCY_YEN:
+						if (oldAmount > wallet.getYen()) {
 							enough = false;
 							break;
 						}
 						tdao.create(firstTransaction);
-						wallet.setJpy(wallet.getJpy() - oldAmount);
+						wallet.setYen(wallet.getYen() - oldAmount);
 						break;
 				}
 				
@@ -308,17 +308,17 @@ public class CreateTransactionServlet extends HttpServlet{
 							tdao.create(secondTransaction);
 							wallet.setGbp(wallet.getGbp() + newAmount);
 							break;
-						case Constants.CURRENCY_CHF:
+						case Constants.CURRENCY_SFr:
 							tdao.create(secondTransaction);
-							wallet.setChf(wallet.getChf() + newAmount);
+							wallet.setSfr(wallet.getSfr() + newAmount);
 							break;
 						case Constants.CURRENCY_USD:
 							tdao.create(secondTransaction);
 							wallet.setUsd(wallet.getUsd() + newAmount);
 							break;
-						case Constants.CURRENCY_JPY:
+						case Constants.CURRENCY_YEN:
 							tdao.create(secondTransaction);
-							wallet.setJpy(wallet.getJpy() + newAmount);
+							wallet.setYen(wallet.getYen() + newAmount);
 							break;
 					}
 				}

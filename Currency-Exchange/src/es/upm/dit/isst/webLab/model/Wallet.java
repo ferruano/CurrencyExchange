@@ -11,9 +11,9 @@ public class Wallet implements Serializable {
     private int walletID;
     private double usd;
     private double eur;
-    private double jpy;
+    private double yen;
     private double gbp;
-    private double chf;
+    private double sfr;
     private double aud;
     private double cad;
 
@@ -51,13 +51,13 @@ public class Wallet implements Serializable {
 	}
 
 
-	public double getJpy() {
-		return jpy;
+	public double getYen() {
+		return yen;
 	}
 
 
-	public void setJpy(double jpy) {
-		this.jpy = jpy;
+	public void setYen(double yen) {
+		this.yen = yen;
 	}
 
 
@@ -71,13 +71,13 @@ public class Wallet implements Serializable {
 	}
 
 
-	public double getChf() {
-		return chf;
+	public double getSfr() {
+		return sfr;
 	}
 
 
-	public void setChf(double chf) {
-		this.chf = chf;
+	public void setSfr(double sfr) {
+		this.sfr = sfr;
 	}
 
 
