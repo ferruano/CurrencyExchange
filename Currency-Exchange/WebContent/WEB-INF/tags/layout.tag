@@ -47,6 +47,13 @@
       </li>
     </ul>
   </div>
+            <form class="form-inline" action="LoginServlet" method="post">    
+                <select class="selectpicker">
+                    <option>Mustard</option>
+                    <option>Ketchup</option>
+                    <option>Relish</option>
+                    </select>
+            </form>
   <form class="form-inline" action="LoginServlet" method="post">
     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login Admin</button>
   </form>
