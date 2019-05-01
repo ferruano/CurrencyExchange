@@ -10,7 +10,7 @@ public class Account implements Serializable {
 
     @Id
     private int accountID;
-    private int cardNumber;
+    private String cardNumber;
     
 	@OneToOne
     private Client owner;
@@ -29,11 +29,11 @@ public class Account implements Serializable {
 		this.accountID = accountID;
 	}
 
-	public int getCardNumber() {
+	public String getCardNumber() {
 		return cardNumber;
 	}
 
-	public void setCardNumber(int cardNumber) {
+	public void setCardNumber(String cardNumber) {
 		this.cardNumber = cardNumber;
 	}
 

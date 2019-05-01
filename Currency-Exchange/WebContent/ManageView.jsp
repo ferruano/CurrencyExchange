@@ -6,7 +6,7 @@
 
 <t:layout>
 	<jsp:attribute name="titleHeader">
-      <title>Deposit/Withdraw</title>
+      <title>Load Money</title>
     </jsp:attribute>
     <jsp:body>
        <br>
@@ -20,6 +20,7 @@
     </shiro:guest>
       <shiro:user>
       <br>
+    <!--  
     <article class="card">
       <div class="card-body p-5">
       <h2 class="card-title">Withdraw</h2>
@@ -29,7 +30,7 @@
                 <div class="form-group">
                   <label for="username">Full name </label>
                   <input type="text" class="form-control" name="username" placeholder="Firstname Surname">
-                </div> <!-- form-group.// -->
+                </div>
               <div class="form-group">
                   <label for="cardNumber">IBAN</label>
                   <div class="input-group">
@@ -40,7 +41,7 @@
                         </span>
                       </div>
                   </div>
-                </div> <!-- form-group.// -->
+                </div> 
                   <div class="form-group">
                   <label for="cardNumber">Amount</label>
                   <div class="input-group">
@@ -60,7 +61,7 @@
 
                       </div>
                   </div>
-                </div> <!-- form-group.// -->
+                </div> 
                 <input type="hidden" name="transactionType" value="1" />
                 <input type="hidden" name="email" value="${client.email}" />
                 <br>
@@ -72,14 +73,16 @@
                 </div>
               </c:if>
                 </form>
-          </div> <!-- tab-pane.// -->
-        </div> <!-- tab-content .// -->
-      </div> <!-- card-body.// -->
-    </article> <!-- card.// -->
+          </div> 
+        </div> 
+      </div> 
+    </article> 
 	<br>
+	-->  
 		<article class="card">
       <div class="card-body p-5">
-      <h2 class="card-title">Deposit</h2>
+      <h2 class="card-title">Load money into your Account</h2>
+      <br>
         <div class="tab-content">
           <div class="tab-pane fade show active" id="nav-tab-card">
             <form action="CreateTransactionServlet" method="post">
@@ -136,6 +139,7 @@
                 <br>
                 <input type="hidden" name="transactionType" value="0" />
                 <input type="hidden" name="email" value="${client.email}" />
+                <input type="hidden" name="currency" value="${client.localCurrency}" />
                 <button type="submit" class="btn btn-primary btn-block" type="button">Deposit</button>
                 </form>
           </div> <!-- tab-pane.// -->

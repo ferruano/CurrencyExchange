@@ -28,7 +28,7 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" href="ExchangeServlet?email=${client.email}">Exchange</a>
+        <a class="nav-link" href="ExchangeServlet?email=${client.email}">Create Swap Request</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="ExchangeRatesServlet?email=${client.email}">Exchange rates</a>
@@ -42,7 +42,7 @@
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="AccountServlet?email=${client.email}">Balance</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="ManageServlet?email=${client.email}">Deposit/Withdraw</a>
+          <a class="dropdown-item" href="ManageServlet?email=${client.email}">Load Money</a>
         </div>
       </li>
     </ul>

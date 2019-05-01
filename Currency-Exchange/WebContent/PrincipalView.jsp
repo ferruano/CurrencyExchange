@@ -16,7 +16,7 @@
 			    <h2 class="card-title">You$wap</h2>
 			    <p class="card-text">The perfect way to change your money.</p>
 			    <shiro:user>
-			    <a href="AccountServlet?email=admin@admin" class="btn btn-primary">Your balance</a>
+			    <a href="AccountServlet?email=${client.email}" class="btn btn-primary">Your balance</a>
 			    </shiro:user>
 			  </div>
 			</div>

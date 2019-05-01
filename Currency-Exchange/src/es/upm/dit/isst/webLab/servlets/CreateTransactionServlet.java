@@ -36,7 +36,7 @@ public class CreateTransactionServlet extends HttpServlet{
 		String currencyString = req.getParameter("currency"); 
 		int currency=1;
 		switch(currencyString) {
-		
+		//Esto deberia ser un stringToInt no?
 		case "1":
 			currency = 1;
 			break;

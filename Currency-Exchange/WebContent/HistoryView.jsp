@@ -9,6 +9,15 @@
       <title>History</title>
     </jsp:attribute>
     <jsp:body>
+    	<shiro:guest> 
+    	<br>
+    	<div class="alert alert-info" role="alert">
+		  <h4 class="alert-heading">You are not logged in!</h4>
+		  <p>Please login to access this information.</p>
+		  <hr>
+		  <p class="mb-0">You can do this by selecting a user at the top right of the navigation bar.</p>
+		</div>
+    </shiro:guest>
         <shiro:user>
 	        <br>
 	      <div class="card">
@@ -46,8 +55,8 @@
 						      <td>${tri.transactionDate}</td>
 						      <td>
 						      	<c:choose>
-						      		<c:when test="${tri.transactionType == 1}">Withdraw</c:when>
-			                        <c:otherwise>Deposit</c:otherwise>
+						      		<c:when test="${tri.transactionType == 1}">POS Terminal</c:when>
+			                        <c:otherwise>Load</c:otherwise>
 						      	</c:choose>
 						      </td>
 						      <!--<td>${tri.user}</td> -->

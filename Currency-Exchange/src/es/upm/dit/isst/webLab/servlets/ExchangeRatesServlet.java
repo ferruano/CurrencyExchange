@@ -13,6 +13,7 @@ import es.upm.dit.isst.webLab.dao.ClientDAOImplementation;
 import javax.ws.rs.GET;
 import javax.ws.rs.client.*;
 
+import org.decimal4j.util.DoubleRounder;
 import org.json.JSONObject;
 import Constants.Constants;
 
@@ -98,11 +99,21 @@ public class ExchangeRatesServlet extends HttpServlet{
 			req.getSession().setAttribute( "orCurrency", OriginCurrency);
 			exRates = getExRate(OriginCurrency);
 			rowsHidden = getRowHidden(OriginCurrency);
-		}else{
+		}else if (cdao.read(email) == null){
+			
+			req.getSession().setAttribute( "orCurrency", "USD");
+			exRates = getExRate("USD");
+			rowsHidden = getRowHidden("USD");
+		}
+		else {
 			String userCurr = numberToCurrency(cdao.read(email).getLocalCurrency());
 			req.getSession().setAttribute( "orCurrency", userCurr);
 			exRates = getExRate(userCurr);
 			rowsHidden = getRowHidden(userCurr);
+	}
+		
+		for(int i = 0; i < exRates.length; i++) {
+			exRates[i] = DoubleRounder.round(exRates[i], 2);
 		}
 		
 		req.getSession().setAttribute( "usdRate", exRates[0]);
