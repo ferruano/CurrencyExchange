@@ -44,9 +44,9 @@
 						      	 <c:choose>
 			                          <c:when test="${tri.currencyType == 6}">USD</c:when>
 			                          <c:when test="${tri.currencyType == 3}">EUR</c:when>
-			                          <c:when test="${tri.currencyType == 7}">YEN</c:when>
+			                          <c:when test="${tri.currencyType == 7}">JPY</c:when>
 			                          <c:when test="${tri.currencyType == 4}">GBP</c:when>
-			                          <c:when test="${tri.currencyType == 5}">SFr</c:when>
+			                          <c:when test="${tri.currencyType == 5}">CHF</c:when>
 			                          <c:when test="${tri.currencyType == 1}">AUD</c:when>
 			                          <c:when test="${tri.currencyType == 2}">CAD</c:when>
 			                          <c:otherwise>undefined</c:otherwise>

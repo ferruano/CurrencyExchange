@@ -40,7 +40,7 @@
      <td>${client.account.wallet.eur}</td>
     </tr>
     <tr>
-     <td>YEN</td>
+     <td>JPY</td>
      <td>${client.account.wallet.yen}</td>
     </tr>
     <tr>
@@ -48,7 +48,7 @@
      <td>${client.account.wallet.gbp}</td>
     </tr>
     <tr>
-     <td>SFr</td>
+     <td>CHF</td>
      <td>${client.account.wallet.sfr}</td>
     </tr>
     <tr>
