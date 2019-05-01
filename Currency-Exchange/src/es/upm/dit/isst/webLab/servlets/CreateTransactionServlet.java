@@ -35,8 +35,18 @@ public class CreateTransactionServlet extends HttpServlet{
 		String email = req.getParameter("email");
 		String amount = req.getParameter("amount");
 		
-		double oldAmount = Double.parseDouble(req.getParameter("oldAmount"));
-		double newAmount = Double.parseDouble(req.getParameter("newAmount"));
+		double oldAmount = 0.0;
+		double newAmount = 0.0;
+		
+		String oldAmountString = req.getParameter("oldAmount");
+		if (oldAmountString != null) {
+			oldAmount = Double.parseDouble(oldAmountString);
+		}
+		
+		String newAmountString = req.getParameter("newAmount");
+		if (newAmountString != null) {
+			newAmount = Double.parseDouble(newAmountString);
+		}
 		
 		if (amount != null && Double.parseDouble(amount) == 0.0) {
 			req.getSession().setAttribute( "correcto", true);
@@ -54,8 +64,18 @@ public class CreateTransactionServlet extends HttpServlet{
 		String accountString = accountId.toString();
 		String transactionId = timeString + accountString;
 		
-		int from = Integer.parseInt(req.getParameter("from"));
-		int to = Integer.parseInt(req.getParameter("to"));
+		int from = 0;
+		int to = 0;
+		
+		String fromString = req.getParameter("from");
+		if (fromString != null) {
+			from = Integer.parseInt(fromString);
+		}
+		String toString = req.getParameter("to");
+		if (toString != null) {
+			to = Integer.parseInt(toString);
+		}
+		
 		
 		transaction.setTransactionID(transactionId);
 		if (amount != null) {		
