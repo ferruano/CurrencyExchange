@@ -30,7 +30,7 @@
       <br>
         <div class="tab-content">
           <div class="tab-pane fade show active" id="nav-tab-card">
-            <form action="CreateTransactionServlet" method="post">
+            <form action="UnloadTransactionServlet" method="post">
                 <div class="form-group">
                   <label for="cardNumber"> YouSwap Prepaid Card Number: </label>
                   <div class="input-group mb-3">
