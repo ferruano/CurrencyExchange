@@ -88,12 +88,12 @@
             <form action="CreateTransactionServlet" method="post">
                 <div class="form-group">
                   <label for="username">Full name (on the card)</label>
-                  <input type="text" class="form-control" name="username" placeholder="Firstname Surname">
+                  <input type="text" class="form-control" name="username" placeholder="Firstname Surname"  required>
                 </div> <!-- form-group.// -->
               <div class="form-group">
                   <label for="cardNumber">Card number</label>
                   <div class="input-group">
-                    <input type="number" class="form-control" name="cardNumber" placeholder="0000 0000 0000 0000">
+                    <input type="number" class="form-control" name="cardNumber" placeholder="0000 0000 0000 0000"  required>
                       <div class="input-group-append">
                          <span class="input-group-text text-muted">
                             <img src="${pageContext.request.contextPath}/images/credit-card.png" width="20px">
@@ -106,8 +106,8 @@
                         <div class="form-group">
                             <label><span class="hidden-xs">Expiration</span> </label>
                            <div class="input-group">
-                              <input type="number" class="form-control" placeholder="MM" name="">
-                              <input type="number" class="form-control" placeholder="YY" name="">
+                              <input type="number" class="form-control" placeholder="MM" name="" required>
+                              <input type="number" class="form-control" placeholder="YY" name="" required>
                            </div>
                        </div>
                   </div>

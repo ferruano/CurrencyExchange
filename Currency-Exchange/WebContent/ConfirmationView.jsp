@@ -13,7 +13,8 @@
       <br>
     <article class="card">
       <div class="card-body p-5">
-      	<h2 class="card-title">Confirm your request</h2>
+      	<h2 class="card-title">Confirm your swap request</h2>
+      	<br>
         <div class="tab-content">
           <div class="tab-pane fade show active" id="nav-tab-card">
             <form action="CreateTransactionServlet" method="post">
@@ -25,38 +26,41 @@
                   		<label for="amount"> Into: <strong>${newAmount} ${toCurrency} </strong></strong></label>
                 	  </div> <!-- form-group.// -->
 				    </div>
-				    <h4>Choose the insterest</h2>
+				    <h5>How quickly do you need the money?</h5>
+				    <br>
 				    <div>
 				    	<div class="form-check">
   							<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
   							<label class="form-check-label" for="exampleRadios1">
-    							Now: 1%
+    							Instant swap: 1.5%
   							</label>
 						</div>
 						<div class="form-check">
   							<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2" disabled>
   							<label class="form-check-label" for="exampleRadios2">
-    							3 days: 1.3%
+    							3 day swap: 1.3%
   							</label>
 						</div>
 						<div class="form-check">
   							<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3" disabled>
   							<label class="form-check-label" for="exampleRadios3">
-    							5 days: 1.5%
+    							6 day swap: 1.0%
   							</label>
 						</div>
 				    </div>
+				    <br>
+				    <h6>The only fee we take is a small percentage of the swap, based on how fast you need your money.</h6>
 				</div>
-				<br></br>
+				<br>
 			  	<div >
 					<div class="row justify-content-md-center">
 						<div class="col-4">
-					  		<a href="ExchangeServlet?email=${client.email}" class="btn btn-primary">Back</a>
+					  		<a href="ExchangeServlet?email=${client.email}" class="btn btn-primary">Go back</a>
 					    </div>
 					    <div class="col-3">
 					    </div>
 					    <div class="col-4">
-					    	<button type="submit" class="btn btn-primary btn-block" type="button">Confirmar</button>
+					    	<button type="submit" class="btn btn-primary btn-block" type="button">Create swap</button>
 					    </div>
 					  </div>
 					</div>
