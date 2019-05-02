@@ -29,306 +29,207 @@ public class CreateTransactionServlet extends HttpServlet{
 		
 		ClientDAO cdao = ClientDAOImplementation.getInstance();
 		TransactionDAO tdao = TransactionDAOImplementation.getInstance();
-		
-		Transaction transaction = new Transaction();
+		WalletDAO wdao = WalletDAOImplementation.getInstance();
 		
 		String email = req.getParameter("email");
-		String amount = req.getParameter("amount");
-		String currencyString = req.getParameter("currency"); 
-		int currency=1;
-		switch(currencyString) {
-		//Esto deberia ser un stringToInt no?
-		case "1":
-			currency = 1;
-			break;
-		case "2":
-			currency = 2;
-			break;
-		case "3":
-			currency = 3;			
-			break;
-		case "4":
-			currency = 4;
-			break;
-		case "5":
-			currency = 5;
-			break;
-		case "6":
-			currency = 6;
-			break;
-		case "7":
-			currency = 7;
-			break;	
-	}
-		if (Double.parseDouble(amount) == 0.0) {
-			
-			double oldAmount = 0.0;
-			double newAmount = 0.0;
-			
-			String oldAmountString = req.getParameter("oldAmount");
-			if (oldAmountString != null) {
-				oldAmount = Double.parseDouble(oldAmountString);
-			}
-			
-			String newAmountString = req.getParameter("newAmount");
-			if (newAmountString != null) {
-				newAmount = Double.parseDouble(newAmountString);
-			}
-			
-			if (amount != null && Double.parseDouble(amount) == 0.0) {
-				req.getSession().setAttribute( "correcto", true);
+		String transactionType = req.getParameter("transactionType");
+		
+		double amount = 0.0;
+		double oldAmount = 0.0;
+		double newAmount = 0.0;
+		int from = 0;
+		int to = 0;
+		
+		if (transactionType.equals("0")) {
+			amount = Double.parseDouble(req.getParameter("amount"));
+			if (amount <= 0.0)  {
 				getServletContext().getRequestDispatcher( "/ManageView.jsp" ).forward( req, resp );
 				return;
 			}
-			String transactionType = req.getParameter("transactionType");
+		}
+		
+		if (transactionType.equals("2")) {
+			newAmount = Double.parseDouble(req.getParameter("newAmount"));
+			oldAmount = Double.parseDouble(req.getParameter("oldAmount"));
+			from = Integer.parseInt(req.getParameter("from"));
+			to = Integer.parseInt(req.getParameter("to"));
 			
-			Date date = new Date();
-			Long timestamp = date.getTime();
-			String timeString = timestamp.toString();
-			
-			Client client = cdao.read(email);
-			Integer accountId = client.getAccount().getAccountID();
-			String accountString = accountId.toString();
-			String transactionId = timeString + accountString;
-			
-			int from = 0;
-			int to = 0;
-			
-			String fromString = req.getParameter("from");
-			if (fromString != null) {
-				from = Integer.parseInt(fromString);
+			if (oldAmount <= 0.0 || newAmount <= 0)  {
+				getServletContext().getRequestDispatcher( "/ExchangeView.jsp" ).forward( req, resp );
+				return;
 			}
-			String toString = req.getParameter("to");
-			if (toString != null) {
-				to = Integer.parseInt(toString);
+		}
+		
+		Date date = new Date();
+		Long timestamp = date.getTime();
+		String timeString = timestamp.toString();
+
+		Client client = cdao.read(email);
+		Integer accountId = client.getAccount().getAccountID();
+		String accountString = accountId.toString();
+		String transactionId = timeString + accountString;
+		Wallet wallet = client.getAccount().getWallet();
+		Wallet adminWallet = cdao.read("admin@youswap.com").getAccount().getWallet();
+		
+		if (transactionType.equals("0")) {
+			
+			Transaction transaction = createTransaction(transactionId, amount, 0, client.getLocalCurrency(), date, client.getAccount());
+			
+			Double depositAmount = amount;
+			tdao.create(transaction);
+			
+			switch(client.getLocalCurrency()) {
+			
+				case Constants.CURRENCY_AUD:
+					wallet.setAud(wallet.getAud() + depositAmount);
+					break;
+				case Constants.CURRENCY_CAD:
+					wallet.setCad(wallet.getCad() + depositAmount);
+					break;
+				case Constants.CURRENCY_EUR:
+					wallet.setEur(wallet.getEur() + depositAmount);				
+					break;
+				case Constants.CURRENCY_GBP:
+					wallet.setGbp(wallet.getGbp() + depositAmount);
+					break;
+				case Constants.CURRENCY_CHF:
+					wallet.setSfr(wallet.getSfr() + depositAmount);
+					break;
+				case Constants.CURRENCY_USD:
+					wallet.setUsd(wallet.getUsd() + depositAmount);
+					break;
+				case Constants.CURRENCY_JPY:
+					wallet.setYen(wallet.getYen() + depositAmount);		
+					break;	
 			}
+		
+			wdao.update(wallet);
+			req.getSession().setAttribute( "correcto", true);
+			getServletContext().getRequestDispatcher( "/ManageView.jsp" ).forward( req, resp );
+		}
+		
+		if(transactionType.equals("2")) {
 			
 			
-			transaction.setTransactionID(transactionId);
-			transaction.setAmount(Double.parseDouble(amount));
-			if (amount != null) {		
-				transaction.setAmount(Double.parseDouble(amount));
-			}
-			transaction.setTransactionType(Integer.parseInt(transactionType));
-			transaction.setCurrencyType(currency);
-			transaction.setTransactionDate(date);
-			transaction.setUser(client.getAccount());
-					
-			WalletDAO wdao = WalletDAOImplementation.getInstance();
-			Wallet wallet = client.getAccount().getWallet();
 			
-			if (transactionType.equals("0")) {
-				
-				Double depositAmount = transaction.getAmount();
-				tdao.create(transaction);
-				
-				switch(client.getLocalCurrency()) {
-				
-					case Constants.CURRENCY_AUD:
-						wallet.setAud(wallet.getAud() + depositAmount);
-						break;
-					case Constants.CURRENCY_CAD:
-						wallet.setCad(wallet.getCad() + depositAmount);
-						break;
-					case Constants.CURRENCY_EUR:
-						wallet.setEur(wallet.getEur() + depositAmount);				
-						break;
-					case Constants.CURRENCY_GBP:
-						wallet.setGbp(wallet.getGbp() + depositAmount);
-						break;
-					case Constants.CURRENCY_SFr:
-						wallet.setSfr(wallet.getSfr() + depositAmount);
-						break;
-					case Constants.CURRENCY_USD:
-						wallet.setUsd(wallet.getUsd() + depositAmount);
-						break;
-					case Constants.CURRENCY_YEN:
-						wallet.setYen(wallet.getYen() + depositAmount);		
-						break;	
-				}
+			Boolean enough = false;
 			
-				wdao.update(wallet);
-				req.getSession().setAttribute( "correcto", true);
-				getServletContext().getRequestDispatcher( "/ManageView.jsp" ).forward( req, resp );
-			}
+			Transaction firstTransaction = createTransaction(transactionId, oldAmount, 2, from, date, client.getAccount());
+			switch(from) {
 			
-			if (transactionType.equals("1")) {
-				
-				Double withdrawAmount = transaction.getAmount();
-				req.getSession().setAttribute( "client", client);
-				Boolean correcto = true;
-				
-				switch(currency) {
-				
-					case Constants.CURRENCY_AUD:
-						if (withdrawAmount > wallet.getAud()) {
-							correcto = false;
-							break;
-						}
-						tdao.create(transaction);
-						wallet.setAud(wallet.getAud() - withdrawAmount);
+				case Constants.CURRENCY_AUD:
+					if (oldAmount > wallet.getAud()) {
 						break;
-					case Constants.CURRENCY_CAD:
-						if (withdrawAmount > wallet.getCad()) {
-							correcto = false;
-							break;
-						}
-						tdao.create(transaction);
-						wallet.setCad(wallet.getCad() - withdrawAmount);
-						break;
-					case Constants.CURRENCY_EUR:
-						if (withdrawAmount > wallet.getEur()) {
-							correcto = false;
-							break;
-						}
-						tdao.create(transaction);
-						wallet.setEur(wallet.getEur() - withdrawAmount);				
-						break;
-					case Constants.CURRENCY_GBP:
-						if (withdrawAmount > wallet.getGbp()) {
-							correcto = false;
-							break;
-						}
-						tdao.create(transaction);
-						wallet.setGbp(wallet.getGbp() - withdrawAmount);
-						break;
-					case Constants.CURRENCY_SFr:
-						if (withdrawAmount > wallet.getSfr()) {
-							correcto = false;
-							break;
-						}
-						tdao.create(transaction);
-						wallet.setSfr(wallet.getSfr() - withdrawAmount);
-						break;
-					case Constants.CURRENCY_USD:
-						if (withdrawAmount > wallet.getUsd()) {
-							correcto = false;
-							break;
-						}
-						tdao.create(transaction);
-						wallet.setUsd(wallet.getUsd() - withdrawAmount);
-						break;
-					case Constants.CURRENCY_YEN:
-						if (withdrawAmount > wallet.getYen()) {
-							correcto = false;
-							break;
-						}
-						tdao.create(transaction);
-						wallet.setYen(wallet.getYen() - withdrawAmount);		
-						break;		
-				}
-				
-				wdao.update(wallet);
-				req.getSession().setAttribute( "correcto", correcto);
-				getServletContext().getRequestDispatcher( "/TpvView.jsp" ).forward( req, resp );
-			}
-			
-			if(transactionType.equals("2")) {
-				
-				Boolean enough = true;
-				
-				Transaction firstTransaction = transferTransaction(transactionId, oldAmount, 1, from, date, client.getAccount());
-				switch(from) {
-				
-					case Constants.CURRENCY_AUD:
-						if (oldAmount > wallet.getAud()) {
-							enough = false;
-							break;
-						}
-						tdao.create(firstTransaction);
-						wallet.setAud(wallet.getAud() - oldAmount);
-						break;
-					case Constants.CURRENCY_CAD:
-						if (oldAmount > wallet.getCad()) {
-							enough = false;
-							break;
-						}
-						tdao.create(firstTransaction);
-						wallet.setCad(wallet.getCad() - oldAmount);
-						break;
-					case Constants.CURRENCY_EUR:
-						if (oldAmount > wallet.getEur()) {
-							enough = false;
-							break;
-						}
-						tdao.create(firstTransaction);
-						wallet.setEur(wallet.getEur() - oldAmount);
-						break;
-					case Constants.CURRENCY_GBP:
-						if (oldAmount > wallet.getGbp()) {
-							enough = false;
-							break;
-						}
-						tdao.create(firstTransaction);
-						wallet.setGbp(wallet.getGbp() - oldAmount);
-						break;
-					case Constants.CURRENCY_SFr:
-						if (oldAmount > wallet.getSfr()) {
-							enough = false;
-							break;
-						}
-						tdao.create(firstTransaction);
-						wallet.setSfr(wallet.getSfr() - oldAmount);
-						break;
-					case Constants.CURRENCY_USD:
-						if (oldAmount > wallet.getUsd()) {
-							enough = false;
-							break;
-						}
-						tdao.create(firstTransaction);
-						wallet.setUsd(wallet.getUsd() - oldAmount);
-						break;
-					case Constants.CURRENCY_YEN:
-						if (oldAmount > wallet.getYen()) {
-							enough = false;
-							break;
-						}
-						tdao.create(firstTransaction);
-						wallet.setYen(wallet.getYen() - oldAmount);
-						break;
-				}
-				
-				if (enough) {
-					Transaction secondTransaction = transferTransaction(transactionId, newAmount, 0, to, date, client.getAccount());
-					switch(to) {
-					
-						case Constants.CURRENCY_AUD:
-							tdao.create(secondTransaction);
-							wallet.setAud(wallet.getAud() + newAmount);
-							break;
-						case Constants.CURRENCY_CAD:
-							tdao.create(secondTransaction);
-							wallet.setCad(wallet.getCad() + newAmount);
-							break;
-						case Constants.CURRENCY_EUR:
-							tdao.create(secondTransaction);
-							wallet.setEur(wallet.getEur() + newAmount);
-							break;
-						case Constants.CURRENCY_GBP:
-							tdao.create(secondTransaction);
-							wallet.setGbp(wallet.getGbp() + newAmount);
-							break;
-						case Constants.CURRENCY_SFr:
-							tdao.create(secondTransaction);
-							wallet.setSfr(wallet.getSfr() + newAmount);
-							break;
-						case Constants.CURRENCY_USD:
-							tdao.create(secondTransaction);
-							wallet.setUsd(wallet.getUsd() + newAmount);
-							break;
-						case Constants.CURRENCY_YEN:
-							tdao.create(secondTransaction);
-							wallet.setYen(wallet.getYen() + newAmount);
-							break;
 					}
-				}
-				wdao.update(wallet);
-				resp.sendRedirect( req.getContextPath() + "/AccountServlet?email=" + client.getEmail() );
+					tdao.create(firstTransaction);
+					wallet.setAud(wallet.getAud() - oldAmount);
+					adminWallet.setAud(adminWallet.getAud() + oldAmount);
+					enough = true;
+					break;
+				case Constants.CURRENCY_CAD:
+					if (oldAmount > wallet.getCad()) {
+						break;
+					}
+					tdao.create(firstTransaction);
+					wallet.setCad(wallet.getCad() - oldAmount);
+					adminWallet.setCad(adminWallet.getCad() + oldAmount);
+					enough = true;
+					break;
+				case Constants.CURRENCY_EUR:
+					if (oldAmount > wallet.getEur()) {
+						break;
+					}
+					tdao.create(firstTransaction);
+					wallet.setEur(wallet.getEur() - oldAmount);
+					adminWallet.setEur(adminWallet.getEur() + oldAmount);
+					enough = true;
+					break;
+				case Constants.CURRENCY_GBP:
+					if (oldAmount > wallet.getGbp()) {
+						break;
+					}
+					tdao.create(firstTransaction);
+					wallet.setGbp(wallet.getGbp() - oldAmount);
+					adminWallet.setGbp(adminWallet.getGbp() + oldAmount);
+					enough = true;
+					break;
+				case Constants.CURRENCY_CHF:
+					if (oldAmount > wallet.getSfr()) {
+						break;
+					}
+					tdao.create(firstTransaction);
+					wallet.setSfr(wallet.getSfr() - oldAmount);
+					adminWallet.setSfr(adminWallet.getSfr() + oldAmount);
+					enough = true;
+					break;
+				case Constants.CURRENCY_USD:
+					if (oldAmount > wallet.getUsd()) {
+						break;
+					}
+					tdao.create(firstTransaction);
+					wallet.setUsd(wallet.getUsd() - oldAmount);
+					adminWallet.setUsd(adminWallet.getUsd() + oldAmount);
+					enough = true;
+					break;
+				case Constants.CURRENCY_JPY:
+					if (oldAmount > wallet.getYen()) {
+						break;
+					}
+					tdao.create(firstTransaction);
+					wallet.setYen(wallet.getYen() - oldAmount);
+					adminWallet.setYen(adminWallet.getYen() + oldAmount);
+					enough = true;
+					break;
 			}
+			
+			if (enough) {
+				Transaction secondTransaction = createTransaction(transactionId+"1", newAmount, 3, to, date, client.getAccount());
+				switch(to) {
+				
+					case Constants.CURRENCY_AUD:
+						tdao.create(secondTransaction);
+						wallet.setAud(wallet.getAud() + newAmount);
+						adminWallet.setAud(adminWallet.getAud() - newAmount);
+						break;
+					case Constants.CURRENCY_CAD:
+						tdao.create(secondTransaction);
+						wallet.setCad(wallet.getCad() + newAmount);
+						adminWallet.setCad(adminWallet.getCad() - newAmount);
+						break;
+					case Constants.CURRENCY_EUR:
+						tdao.create(secondTransaction);
+						wallet.setEur(wallet.getEur() + newAmount);
+						adminWallet.setEur(adminWallet.getEur() - newAmount);
+						break;
+					case Constants.CURRENCY_GBP:
+						tdao.create(secondTransaction);
+						wallet.setGbp(wallet.getGbp() + newAmount);
+						adminWallet.setGbp(adminWallet.getGbp() - newAmount);
+						break;
+					case Constants.CURRENCY_CHF:
+						tdao.create(secondTransaction);
+						wallet.setSfr(wallet.getSfr() + newAmount);
+						adminWallet.setSfr(adminWallet.getSfr() - newAmount);
+						break;
+					case Constants.CURRENCY_USD:
+						tdao.create(secondTransaction);
+						wallet.setUsd(wallet.getUsd() + newAmount);
+						adminWallet.setUsd(adminWallet.getUsd() - newAmount);
+						break;
+					case Constants.CURRENCY_JPY:
+						tdao.create(secondTransaction);
+						wallet.setYen(wallet.getYen() + newAmount);
+						adminWallet.setYen(adminWallet.getYen() - newAmount);
+						break;
+				}
+			}
+			wdao.update(wallet);
+			wdao.update(adminWallet);
+			resp.sendRedirect( req.getContextPath() + "/AccountServlet?email=" + client.getEmail() );
 		}
 	}
 	
-	private Transaction transferTransaction(String transactionId, Double amount, int transactionType, int currencyType, Date date, Account account ) {
+	private Transaction createTransaction(String transactionId, Double amount, int transactionType, int currencyType, Date date, Account account ) {
 		Transaction t = new Transaction();
 		t.setTransactionID(transactionId);
 		t.setAmount(amount);

@@ -139,7 +139,6 @@
                 <br>
                 <input type="hidden" name="transactionType" value="0" />
                 <input type="hidden" name="email" value="${client.email}" />
-                <input type="hidden" name="currency" value="${client.localCurrency}" />
                 <button type="submit" class="btn btn-primary btn-block" type="button">Load</button>
                 </form>
           </div> <!-- tab-pane.// -->

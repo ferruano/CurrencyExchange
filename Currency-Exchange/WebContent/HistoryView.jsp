@@ -36,7 +36,7 @@
 					  </thead>
 					  <tbody>
 					  <c:forEach items="${transactions}" var="tri">
-					  	<c:if test="${tri.user.accountID == client.account.accountID }">
+					  	<c:if test="${tri.user.accountID == client.account.accountID}">
 						    <tr>
 						      <td>${tri.transactionID}</td>
 						      <td>${tri.amount}</td>
@@ -56,6 +56,8 @@
 						      <td>
 						      	<c:choose>
 						      		<c:when test="${tri.transactionType == 1}">POS Terminal</c:when>
+						      		<c:when test="${tri.transactionType == 2}">Swap Out</c:when>
+						      		<c:when test="${tri.transactionType == 3}">Swap In</c:when>
 			                        <c:otherwise>Load</c:otherwise>
 						      	</c:choose>
 						      </td>
