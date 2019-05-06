@@ -46,18 +46,26 @@ public class ConfirmationServlet extends HttpServlet{
 	public double getExrate(String originCurrency, String destCurrency) {
 		String exchangeKey = "58ffdde58954130b3ede";
 		String exchangeKey2 = "d49444542eb8ba4223ea";
-		Client client = ClientBuilder.newClient();
+		double exRate = 0;
 		
-		String infoExchange= client.target("https://free.currencyconverterapi.com/api/v6/convert")
-				.queryParam("q",originCurrency+"_"+destCurrency)
-				.queryParam("compact", "ultra")
-				.queryParam("apiKey", exchangeKey2)
-				.request()
-		        .get(String.class);
-		
-		JSONObject infoEx = new JSONObject(infoExchange);
-		double exRate = infoEx.getDouble(originCurrency+"_"+destCurrency);
-		
+		try {
+
+			Client client = ClientBuilder.newClient();
+			
+			String infoExchange= client.target("https://free.currencyconverterapi.com/api/v6/convert")
+					.queryParam("q",originCurrency+"_"+destCurrency)
+					.queryParam("compact", "ultra")
+					.queryParam("apiKey", exchangeKey)
+					.request()
+			        .get(String.class);
+			
+			JSONObject infoEx = new JSONObject(infoExchange);
+			exRate = infoEx.getDouble(originCurrency+"_"+destCurrency);
+			
+			return exRate;
+		}catch(Exception e) {
+			System.out.print("ADMIIIIIIINNNNNNN NECESITAS CAMBIAR LA KEY");
+		}	
 		return exRate;
 	}
 	

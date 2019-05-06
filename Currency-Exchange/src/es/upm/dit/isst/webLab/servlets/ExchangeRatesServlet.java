@@ -70,7 +70,7 @@ public class ExchangeRatesServlet extends HttpServlet{
 				String infoExchange= client.target("https://free.currencyconverterapi.com/api/v6/convert")
 						.queryParam("q",originCurrency+"_"+Constants.currency[i])
 						.queryParam("compact", "ultra")
-						.queryParam("apiKey", exchangeKey2)
+						.queryParam("apiKey", exchangeKey)
 						.request()
 				        .get(String.class);
 				
