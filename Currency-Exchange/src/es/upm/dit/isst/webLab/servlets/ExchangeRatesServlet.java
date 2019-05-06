@@ -21,24 +21,24 @@ import Constants.Constants;
 public class ExchangeRatesServlet extends HttpServlet{
 	
 	//Método local para pasar del numero que dentifica cada moneda a su acrónimo.
-	private String numberToCurrency(int number) {		
+	public String numberToCurrency(int number) {		
 		switch(number) {
 			case 1:
-				return "USD";
+				return "AUD";
 			case 2:
-				return "EUR";
+				return "CAD";
 			case 3:
-				return "JPY";
+				return "EUR";
 			case 4:
 				return "GBP";
 			case 5:
 				return "CHF";
 			case 6:
-				return "AUD";
+				return "USD";
 			case 7:
-				return "CAD";
+				return "JPY";
 			default:
-				return "EUR";
+				return "USD";
 		}	
 	}
 	
@@ -61,24 +61,28 @@ public class ExchangeRatesServlet extends HttpServlet{
 	public double[] getExRate(String originCurrency){
 		String exchangeKey = "58ffdde58954130b3ede";
 		String exchangeKey2 = "d49444542eb8ba4223ea"; //Clave por si usamos la api más de 100 veces cada hora
-		
-		Client client = ClientBuilder.newClient();
 		double[] exRates = new double[7];
 		
-		for(int i=0; i<Constants.currency.length;i++) {
-			String infoExchange= client.target("https://free.currencyconverterapi.com/api/v6/convert")
-					.queryParam("q",originCurrency+"_"+Constants.currency[i])
-					.queryParam("compact", "ultra")
-					.queryParam("apiKey", exchangeKey2)
-					.request()
-			        .get(String.class);
+		try {
+			Client client = ClientBuilder.newClient();
 			
-			JSONObject infoEx = new JSONObject(infoExchange);
-			double exRate = infoEx.getDouble(originCurrency+"_"+Constants.currency[i]);
-			exRates[i] = exRate;
-		}
-		
-		client.close();
+			for(int i=0; i<Constants.currency.length;i++) {
+				String infoExchange= client.target("https://free.currencyconverterapi.com/api/v6/convert")
+						.queryParam("q",originCurrency+"_"+Constants.currency[i])
+						.queryParam("compact", "ultra")
+						.queryParam("apiKey", exchangeKey2)
+						.request()
+				        .get(String.class);
+				
+				JSONObject infoEx = new JSONObject(infoExchange);
+				double exRate = infoEx.getDouble(originCurrency+"_"+Constants.currency[i]);
+				exRates[i] = exRate;
+			}
+			client.close();
+			return exRates;
+		}catch(Exception e) {
+			System.out.print("ADMIIIIIIINNNNNNN NECESITAS CAMBIAR LA KEY");
+		}	
 		return exRates;
 	}
 
@@ -99,8 +103,7 @@ public class ExchangeRatesServlet extends HttpServlet{
 			req.getSession().setAttribute( "orCurrency", OriginCurrency);
 			exRates = getExRate(OriginCurrency);
 			rowsHidden = getRowHidden(OriginCurrency);
-		}else if (cdao.read(email) == null){
-			
+		}else if (cdao.read(email) == null) {
 			req.getSession().setAttribute( "orCurrency", "USD");
 			exRates = getExRate("USD");
 			rowsHidden = getRowHidden("USD");
@@ -110,7 +113,7 @@ public class ExchangeRatesServlet extends HttpServlet{
 			req.getSession().setAttribute( "orCurrency", userCurr);
 			exRates = getExRate(userCurr);
 			rowsHidden = getRowHidden(userCurr);
-	}
+		}
 		
 		for(int i = 0; i < exRates.length; i++) {
 			exRates[i] = DoubleRounder.round(exRates[i], 2);
