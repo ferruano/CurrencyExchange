@@ -59,29 +59,35 @@ public class ExchangeRatesServlet extends HttpServlet{
 	//Método que llama a la API e introduce el valor de cada moneda en el array exRates
 	@GET 
 	public double[] getExRate(String originCurrency){
-		String exchangeKey = "58ffdde58954130b3ede";
-		String exchangeKey2 = "d49444542eb8ba4223ea"; //Clave por si usamos la api más de 100 veces cada hora
 		double[] exRates = new double[7];
 		
 		try {
 			Client client = ClientBuilder.newClient();
+			String infoExchange= client.target("https://api.exchangeratesapi.io/latest")
+					.queryParam("base", originCurrency)
+					.request()
+			        .get(String.class);
 			
-			for(int i=0; i<Constants.currency.length;i++) {
-				String infoExchange= client.target("https://free.currencyconverterapi.com/api/v6/convert")
-						.queryParam("q",originCurrency+"_"+Constants.currency[i])
-						.queryParam("compact", "ultra")
-						.queryParam("apiKey", exchangeKey)
-						.request()
-				        .get(String.class);
-				
-				JSONObject infoEx = new JSONObject(infoExchange);
-				double exRate = infoEx.getDouble(originCurrency+"_"+Constants.currency[i]);
-				exRates[i] = exRate;
+			JSONObject infoEx = new JSONObject(infoExchange);
+			JSONObject exRate = infoEx.getJSONObject("rates");
+			
+			exRates[0] = exRate.getDouble("USD");
+			try {
+				exRates[1] = exRate.getDouble("EUR");
+			} catch (Exception e) {
+				exRates[1] = 1.0;
 			}
+			
+			exRates[2] = exRate.getDouble("JPY");
+			exRates[3] = exRate.getDouble("GBP");
+			exRates[4] = exRate.getDouble("CHF");
+			exRates[5] = exRate.getDouble("AUD");
+			exRates[6] = exRate.getDouble("CAD");
+			
 			client.close();
 			return exRates;
 		}catch(Exception e) {
-			System.out.print("ADMIIIIIIINNNNNNN NECESITAS CAMBIAR LA KEY");
+			System.out.print("Error en la API");
 		}	
 		return exRates;
 	}
