@@ -33,8 +33,8 @@ public class ConfirmationServlet extends HttpServlet{
 		double newAmount = Math.floor(getExrate(fromCurrency, toCurrency) * Double.parseDouble(amount) * 100.0)/100.0;
 		
 		req.getSession().setAttribute( "client", cdao.read(email) );
-		req.getSession().setAttribute( "amount", amount );
-		req.getSession().setAttribute( "newAmount", newAmount );
+		req.getSession().setAttribute( "amount", Math.floor(Double.parseDouble(amount)*100)/100);
+		req.getSession().setAttribute( "newAmount", Math.floor(newAmount*100)/100);
 		req.getSession().setAttribute( "fromCurrency", fromCurrency );
 		req.getSession().setAttribute( "toCurrency", toCurrency );
 		req.getSession().setAttribute( "from", from );

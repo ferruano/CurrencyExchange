@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.decimal4j.util.DoubleRounder;
+
 import Constants.Constants;
 import es.upm.dit.isst.webLab.dao.ClientDAO;
 import es.upm.dit.isst.webLab.dao.ClientDAOImplementation;
@@ -76,7 +78,7 @@ public class UnloadTransactionServlet extends HttpServlet{
 		String transactionId = timeString + accountString;
 		
 		transaction.setTransactionID(transactionId);
-		transaction.setAmount(Double.parseDouble(amount));
+		transaction.setAmount(DoubleRounder.round(Double.parseDouble(amount), 2));
 		transaction.setTransactionType(Integer.parseInt(transactionType));
 		transaction.setCurrencyType(currency);
 		transaction.setTransactionDate(date);
