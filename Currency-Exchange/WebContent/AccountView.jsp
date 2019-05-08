@@ -9,7 +9,10 @@
       <title>Balance</title>
     </jsp:attribute>
     <jsp:body>
-    	<shiro:guest> 
+    <div class="container">
+  		<div class="row justify-content-center">
+    		<div class="col-6 align-self-center">
+       			<shiro:guest> 
         <br>
     	<div class="alert alert-info" role="alert">
 		  <h4 class="alert-heading">You are not logged in!</h4>
@@ -64,5 +67,8 @@
  </div>
 </div>
 	</shiro:user>
+    		</div>
+  		</div>
+	</div>
     </jsp:body>
 </t:layout>

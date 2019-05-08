@@ -59,7 +59,7 @@
 </nav>
 	<div class="container">
   		<div class="row justify-content-center">
-    		<div class="col-6 align-self-center">
+    		<div class="col-13 align-self-center">
        			<div id="body">
       				<jsp:doBody/>
     			</div>

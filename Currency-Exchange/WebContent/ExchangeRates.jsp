@@ -10,7 +10,10 @@
     </jsp:attribute>
     <jsp:body>
         <br>
-    <div class="card">
+    <div class="container">
+  		<div class="row justify-content-center">
+    		<div class="col-6 align-self-center">
+       			 <div class="card">
   		<div class="card-body">  
 			<h3 class="card-title" align="center">Exchange Rates</h3>
 			<div class="container">
@@ -82,6 +85,10 @@
 			</div>
  		</div>
 	</div>
+    		</div>
+  		</div>
+	</div>
+   
 	<br> 
     </jsp:body>
 </t:layout>

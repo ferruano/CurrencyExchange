@@ -9,7 +9,10 @@
       <title>Confirm Request</title>
     </jsp:attribute>
     <jsp:body>
-      <shiro:user>
+    	<div class="container">
+  		<div class="row justify-content-center">
+    		<div class="col-8 align-self-center">
+       			<shiro:user>
       <br>
     <article class="card">
       <div class="card-body p-5">
@@ -78,5 +81,9 @@
     </article> <!-- card.// -->
 	
 	    </shiro:user>
+    		</div>
+  		</div>
+	</div>
+      
     </jsp:body>
 </t:layout>
