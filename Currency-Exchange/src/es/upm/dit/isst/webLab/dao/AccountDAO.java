@@ -12,7 +12,6 @@ public interface AccountDAO {
 
     void update(Account account);
 
-
     void delete(Account account);
 
     Collection<Account> readAll();
