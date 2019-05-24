@@ -31,6 +31,7 @@ public class CreateTransactionServlet extends HttpServlet{
 		TransactionDAO tdao = TransactionDAOImplementation.getInstance();
 		WalletDAO wdao = WalletDAOImplementation.getInstance();
 		
+		
 		String email = req.getParameter("email");
 		String transactionType = req.getParameter("transactionType");
 		
